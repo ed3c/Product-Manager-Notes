@@ -1,0 +1,21 @@
+version: 1
+policy:
+  github_is_canonical: true
+  google_docs_are_narrative_edges: true
+  google_sheets_are_dashboard_edges: true
+  missing_url_state: ABSENT
+links:
+  - id: GDOC-TPM-CASE-STUDIES
+    type: google_doc
+    url: null
+    state: ABSENT
+    purpose: long-form Technical Product Manager case studies and interview narratives
+  - id: GSHEET-TPM-EVIDENCE-MATRIX
+    type: google_sheet
+    url: null
+    state: ABSENT
+    purpose: human-readable mirror of requirement, gap, evidence, issue and verification status
+rules:
+  - external documents may summarize canonical GitHub state but may not override it
+  - a URL proves reachability only, not correctness or freshness
+  - no secrets, private credentials, customer data or unverifiable metrics in exported/public material

@@ -16,42 +16,29 @@ atoms:
     stack_class: root
     branch: bootstrap/manager-evidence-contract
     base_branch: main
-    owns_paths:
-      - README.md
-      - AGENTS.md
-      - roles/technical-product-manager/
-      - registry/
-      - docs/
-      - prompts/
-    consumes_artifacts: []
-    provides_artifacts:
-      - manager-evidence-contract-v1
-      - job-contract-v1
-      - stage-program-v1
-    blockers:
-      - HUMAN_ADMIT_MERGE
+    owns_paths: [README.md, AGENTS.md, roles/technical-product-manager/, registry/, docs/, prompts/]
+    provides_artifacts: [manager-evidence-contract-v1, job-contract-v1, stage-program-v1]
+    blockers: [HUMAN_ADMIT_MERGE]
 
   - id: E1-evidence-audit
     atom: E
     issues: [1]
-    pull_request: null
-    state: PLANNED
+    pull_request: 9
+    state: PR_OPEN_STAGE_COMPLETE
     stack_class: child
     parent: C0-bootstrap-contract
-    branch: null
+    branch: audit/tpm-existing-evidence
     base_branch: bootstrap/manager-evidence-contract
+    head_commit: 828eb929506a947aaf1e18de84866d3002348f1b
     owns_paths:
       - registry/evidence.yaml
       - registry/gaps.yaml
+      - registry/stack-plan.yaml
       - roles/technical-product-manager/competency-matrix.yaml
       - docs/evidence-audit/
-    consumes_artifacts:
-      - manager-evidence-contract-v1
-      - job-contract-v1
-    provides_artifacts:
-      - exact-tpm-evidence-audit-v1
-    blockers:
-      - EXACT_REPOSITORY_EVIDENCE_NOT_YET_BOUND
+    consumes_artifacts: [manager-evidence-contract-v1, job-contract-v1]
+    provides_artifacts: [exact-tpm-evidence-audit-v1]
+    blockers: [HUMAN_ADMIT_MERGE]
 
   - id: D2-product-system-design
     atom: D
@@ -67,12 +54,9 @@ atoms:
       - roles/technical-product-manager/product/
       - docs/case-studies/
       - docs/decisions/
-    consumes_artifacts:
-      - exact-tpm-evidence-audit-v1
-    provides_artifacts:
-      - flagship-product-system-design-v1
-    blockers:
-      - COMPLETION_REQUIRES_E1
+    consumes_artifacts: [exact-tpm-evidence-audit-v1]
+    provides_artifacts: [flagship-product-system-design-v1]
+    blockers: [COMPLETION_REQUIRES_E1_ADMITTED]
 
   - id: E3-failure-decision-library
     atom: E
@@ -86,13 +70,9 @@ atoms:
     owns_paths:
       - roles/technical-product-manager/failures/
       - roles/technical-product-manager/interviews/
-    consumes_artifacts:
-      - exact-tpm-evidence-audit-v1
-    provides_artifacts:
-      - manager-failure-decision-library-v1
-    blockers:
-      - SYNTHETIC_CASES_MUST_REMAIN_DRILL
-      - COMPLETION_REQUIRES_E1
+    consumes_artifacts: [exact-tpm-evidence-audit-v1]
+    provides_artifacts: [manager-failure-decision-library-v1]
+    blockers: [SYNTHETIC_CASES_MUST_REMAIN_DRILL, COMPLETION_REQUIRES_E1_ADMITTED]
 
   - id: X4-manager-convergence
     atom: X
@@ -100,22 +80,13 @@ atoms:
     pull_request: null
     state: PLANNED
     stack_class: convergence
-    parent_completion:
-      - D2-product-system-design
-      - E3-failure-decision-library
+    parent_completion: [D2-product-system-design, E3-failure-decision-library]
     branch: null
     base_branch: null
-    owns_paths:
-      - README.md
-      - docs/INDEX.md
-      - registry/external-links.yaml
-      - registry/stack-plan.yaml
+    owns_paths: [README.md, docs/INDEX.md, registry/external-links.yaml, registry/stack-plan.yaml]
     consumes_artifacts:
       - flagship-product-system-design-v1
       - manager-failure-decision-library-v1
       - exact-public-devops-evidence-subjects
-    provides_artifacts:
-      - interview-ready-manager-evidence-graph
-    blockers:
-      - DEVOPS_EVIDENCE_RESIDUALS
-      - HUMAN_ADMIT_EXPORT
+    provides_artifacts: [interview-ready-manager-evidence-graph]
+    blockers: [DEVOPS_EVIDENCE_RESIDUALS, HUMAN_ADMIT_EXPORT]

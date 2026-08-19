@@ -2,25 +2,28 @@
 
 ## Purpose
 
-This private repository is the canonical **Manager orchestration and evidence-routing control plane**. It owns source/requirement/gap identity, Product/System Design contracts, stage prompts, cross-repository task routing, Google projection links and interview closure. Public executable evidence belongs to `ed3c/DevOps-Manager-Notes`; reusable procedure belongs to `ed3c/skills-shared`.
+This public repository is the canonical **Manager orchestration and evidence-routing control plane** for public-safe Product/DevOps Manager evidence. It owns source/requirement/gap identity, Product/System Design contracts, stage prompts, cross-repository task routing, Google projection links and interview closure. Public executable evidence belongs to `ed3c/DevOps-Manager-Notes`; reusable procedure belongs to `ed3c/skills-shared`.
+
+GitHub repository metadata is the visibility authority. Never assume a repository is private because prose says so. A visibility change is Human-owned; if observed visibility disagrees with documentation, stop publication-sensitive work, record `AUTHORITY_DELTA`/`EVIDENCE_DELTA`, and repair the documentation contract without changing visibility automatically.
 
 ## Mandatory read order
 
 1. `README.md`
-2. `docs/INDEX.md`
-3. `docs/architecture/MANAGER_EVIDENCE_GRAPH.md`
-4. `docs/architecture/REPO_INTEGRATION_MAP.md`
-5. `docs/case-studies/INTERNAL_AI_PLATFORM_MVP_DEMO.md`
-6. `roles/technical-product-manager/job-contract.yaml`
-7. `roles/technical-product-manager/competency-matrix.yaml`
-8. `registry/sources.yaml`
-9. `registry/claims.yaml`
-10. `registry/evidence.yaml`
-11. `registry/gaps.yaml`
-12. `registry/external-links.yaml`
-13. `registry/stack-plan.yaml`
-14. current `prompts/stage-*.md` or `prompts/full-mvp-devops-router.md`
-15. exact issue / PR / commit / source subject
+2. `docs/PUBLIC_DISCLOSURE_CHECKLIST.md`
+3. `docs/INDEX.md`
+4. `docs/architecture/MANAGER_EVIDENCE_GRAPH.md`
+5. `docs/architecture/REPO_INTEGRATION_MAP.md`
+6. `docs/case-studies/INTERNAL_AI_PLATFORM_MVP_DEMO.md`
+7. `roles/technical-product-manager/job-contract.yaml`
+8. `roles/technical-product-manager/competency-matrix.yaml`
+9. `registry/sources.yaml`
+10. `registry/claims.yaml`
+11. `registry/evidence.yaml`
+12. `registry/gaps.yaml`
+13. `registry/external-links.yaml`
+14. `registry/stack-plan.yaml`
+15. current `prompts/stage-*.md` or `prompts/full-mvp-devops-router.md`
+16. exact issue / PR / commit / source subject
 
 When a reusable method is triggered, read its canonical `skills-shared` implementation rather than copying local variants:
 
@@ -38,6 +41,14 @@ openwiki-source-anchoring  source/path/quote verification for generated docs
 runtime-env                secret-free runtime/profile/workload contract
 skill-resume-site          public portfolio projection after evidence admission
 ```
+
+No support repository may become a second Manager-state authority or be copied into this public repository merely to make context convenient.
+
+## Public disclosure law
+
+Before writing or exporting public material, apply `docs/PUBLIC_DISCLOSURE_CHECKLIST.md`. Public tracked content must not contain credentials, customer/user private data, employer/client confidential material, private source documents, sensitive prompts, private repository bodies, restricted redistribution material, or unredacted runtime identity. Prefer exact public links and bounded paraphrases over copying source bodies.
+
+Public reachability does not promote evidence. Real tenure/adoption/production claims remain Human/admissible-production evidence boundaries.
 
 ## Operating mode
 
@@ -117,19 +128,19 @@ Executable work routes to the public DevOps plane:
 
 ```text
 DevOps #11 / PR #12  Full MVP technology/routing contract
-→ DevOps #1          invariant/evidence audit
-→ DevOps #2          base typed service/artifact/evidence contracts
-→ parallel:
-   #3 observability/load
-   #4 policy/security
-   #7 ML/LLMOps/rollouts
-   #8 Demo Console
-   #10 supply-chain/fault
+→ DevOps #1 / PR #13 invariant/evidence audit
+→ DevOps #2 / PR #14 Core remote FIRST_GREEN
+→ parallel remote lanes:
+   #3  / PR #36 observability/load
+   #4  / PR #38 policy/security
+   #7  / PR #39 ML/LLMOps/rollouts
+   #8  / PR #37 Demo Console
+   #10 / PR #40 supply-chain/fault
 → #5 failure/recovery convergence
 → #9 final reviewer convergence
 ```
 
-After Product P4 freezes the task graph, route separate ChatGPT/Agent sessions to the exact zero-context prompts in `ed3c/DevOps-Manager-Notes/prompts/`. Product does not duplicate those implementation prompts.
+Remote FIRST_GREEN is lane-bounded. Local kind/Kubernetes, local model/llama.cpp, live Argo Rollouts and later failure convergence remain separate proof obligations.
 
 ## Tech Lead laws
 
@@ -195,7 +206,7 @@ L5 ADVERSARIAL_OR_CHAOS
 L6 PRODUCTION_OBSERVATION
 ```
 
-Virtual load is not real adoption; local K8s is not production experience; synthetic incident is not production incident; UI/docs do not promote evidence.
+Virtual load is not real adoption; local/CI K8s is not production experience; synthetic incident is not production incident; UI/docs do not promote evidence.
 
 ## Interview closure
 
@@ -217,7 +228,7 @@ Missing edges keep the gap open.
 
 ## Google / GitHub boundary
 
-GitHub is canonical for requirements, source IDs, decisions, issues, PRs, Stack state and evidence. Existing Google Sheet and Doc are non-authoritative human mirrors listed in `registry/external-links.yaml`. Never put secret values or private evidence into a public projection.
+GitHub is canonical for requirements, source IDs, decisions, issues, PRs, Stack state and evidence. Existing Google Sheet and Doc are non-authoritative human mirrors listed in `registry/external-links.yaml`. Never mirror secret/private/confidential content into public GitHub or a public projection.
 
 ## Local Handoff
 
@@ -225,6 +236,6 @@ Only the executable evidence plane compiles local runtime commands. Product may 
 
 ## Stop / Human boundaries
 
-Stop on stale subject, overlapping lease, missing predecessor receipt, semantic conflict, private disclosure risk, unbounded side effect, invalid evidence, unavailable physical runtime, or Human-owned transition.
+Stop on stale subject, overlapping lease, missing predecessor receipt, semantic conflict, private disclosure risk, unbounded side effect, invalid evidence, unavailable physical runtime, unresolved redistribution/license boundary, or Human-owned transition.
 
 Human/trusted-owner operations include semantic conflict resolution, force push, merge/release, production promotion/rollback admission, visibility/permission changes and claims of real production/users/incidents/people-management tenure.

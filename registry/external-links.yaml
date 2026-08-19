@@ -1,21 +1,27 @@
-version: 1
+version: 2
 policy:
   github_is_canonical: true
   google_docs_are_narrative_edges: true
   google_sheets_are_dashboard_edges: true
   missing_url_state: ABSENT
 links:
-  - id: GDOC-TPM-CASE-STUDIES
+  - id: GDOC-MANAGER-NARRATIVE-INDEX
     type: google_doc
-    url: null
-    state: ABSENT
-    purpose: long-form Technical Product Manager case studies and interview narratives
-  - id: GSHEET-TPM-EVIDENCE-MATRIX
+    url: https://docs.google.com/document/d/10qgxR5TxYiZG55cY9wN9ANrkmG_o32vBVrSdd45fgRM/edit
+    state: BOUND
+    purpose: human-readable Product/DevOps Manager interview and failure narrative index
+    canonical_owner: Product-Manager-Notes
+    evidence_authority: NONE
+  - id: GSHEET-MANAGER-EVIDENCE-GRAPH
     type: google_sheet
-    url: null
-    state: ABSENT
-    purpose: human-readable mirror of requirement, gap, evidence, issue and verification status
+    url: https://docs.google.com/spreadsheets/d/18W2xpge7ZgA4WHJd1wsbMOuC5vgCsskCwYeDYPG-twQ/edit
+    state: BOUND
+    purpose: human-readable mirror of requirement, gap, issue, evidence lane, Shadow delta, and Local Handoff status
+    canonical_owner: Product-Manager-Notes
+    evidence_authority: NONE
 rules:
   - external documents may summarize canonical GitHub state but may not override it
-  - a URL proves reachability only, not correctness or freshness
-  - no secrets, private credentials, customer data or unverifiable metrics in exported/public material
+  - a URL proves reachability only, not correctness, freshness, authorship, or closure
+  - external projections must point back to exact GitHub issue/PR/commit/file/evidence subjects when making a claim
+  - no secrets, private credentials, customer data, device identifiers, or unverifiable metrics in exported/public material
+  - Google projection state cannot promote ABSENT, NOT_IMPLEMENTED, NOT_EXERCISED, DRILL, local-runtime, or virtual-load evidence

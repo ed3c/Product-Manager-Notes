@@ -61,7 +61,7 @@ jobs:
           grep -q 'DRILL' roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md
           grep -q 'production incident history' roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md
           grep -q 'HUMAN_ADMIT_REQUIRED' docs/milestones/PUBLIC_MANAGER_M4_ROUTING.md
-          grep -q 'Google content has zero evidence-promotion authority' AGENTS.md
+          grep -q 'Google Sheet/Doc URLs have zero evidence-promotion authority' AGENTS.md
           if grep -R -I -E '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|ghp_[A-Za-z0-9]{20,}|github_pat_)' docs/milestones registry/public-m4-manager-routing.json roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md README.md AGENTS.md; then
             echo 'secret-like material found in public Product routing artifacts' >&2
             exit 1

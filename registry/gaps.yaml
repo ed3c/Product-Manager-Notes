@@ -1,0 +1,22 @@
+version: 1
+gaps:
+  - id: TPM-GAP-001
+    requirement: TPM-REQ-001
+    state: ABSENT
+    description: audited evidence for ML/Data/Platform engineering depth is not yet bound
+  - id: TPM-GAP-002
+    requirement: TPM-REQ-002
+    state: ABSENT
+    description: GitHub can prove product/program artifacts but cannot prove years of employment tenure
+  - id: TPM-GAP-003
+    requirement: TPM-REQ-003
+    state: NOT_IMPLEMENTED
+    description: executable model/eval/deploy/monitor/version lifecycle case is not yet closed
+  - id: TPM-GAP-004
+    requirement: TPM-REQ-004
+    state: NOT_EXERCISED
+    description: architecture review and interview narratives have not yet been verified against exact evidence
+  - id: TPM-GAP-005
+    requirement: TPM-REQ-005
+    state: NOT_EXERCISED
+    description: reproducible 1000-virtual-user platform capacity evidence is not yet bound

@@ -1,4 +1,4 @@
-version: 1
+version: 2
 method_owner: ed3c/skills-shared/skills/git-town-stacked-pr-worker
 consumer: ed3c/Product-Manager-Notes
 policy:
@@ -7,6 +7,8 @@ policy:
   path_disjoint_work_should_remain_sibling: true
   one_convergence_owner: true
   merge_release_promotion_human_owned: true
+  start_readiness_is_not_completion_readiness: true
+
 atoms:
   - id: C0-bootstrap-contract
     atom: C
@@ -31,15 +33,41 @@ atoms:
     blockers:
       - HUMAN_ADMIT_MERGE
 
+  - id: C6-full-mvp-product-contract
+    atom: C
+    issues: [6, 7]
+    pull_request: 8
+    state: PR_DRAFT
+    stack_class: child
+    parent: C0-bootstrap-contract
+    branch: agent/full-manager-mvp-demo-contract
+    base_branch: bootstrap/manager-evidence-contract
+    owns_paths:
+      - docs/case-studies/INTERNAL_AI_PLATFORM_MVP_DEMO.md
+      - README.md
+      - AGENTS.md
+      - registry/stack-plan.yaml
+      - prompts/full-mvp-devops-router.md
+    consumes_artifacts:
+      - manager-evidence-contract-v1
+      - job-contract-v1
+    provides_artifacts:
+      - full-manager-mvp-product-contract-v1
+      - full-mvp-technology-adr-request-v1
+      - full-mvp-devops-routing-v1
+    blockers:
+      - DEVOPS_RUNTIME_RESIDUALS
+      - HUMAN_ADMIT_MERGE
+
   - id: E1-evidence-audit
     atom: E
     issues: [1]
     pull_request: null
     state: PLANNED
-    stack_class: child
-    parent: C0-bootstrap-contract
+    stack_class: sibling
+    parent_completion: C0-bootstrap-contract
     branch: null
-    base_branch: bootstrap/manager-evidence-contract
+    base_branch: null
     owns_paths:
       - registry/evidence.yaml
       - registry/gaps.yaml
@@ -59,20 +87,25 @@ atoms:
     pull_request: null
     state: PLANNED
     stack_class: sibling
-    parent_completion: E1-evidence-audit
+    parent_completion:
+      - E1-evidence-audit
+      - C6-full-mvp-product-contract
     branch: null
     base_branch: null
     owns_paths:
       - roles/technical-product-manager/system-design/
       - roles/technical-product-manager/product/
-      - docs/case-studies/
       - docs/decisions/
+    read_only_paths:
+      - docs/case-studies/INTERNAL_AI_PLATFORM_MVP_DEMO.md
     consumes_artifacts:
       - exact-tpm-evidence-audit-v1
+      - full-manager-mvp-product-contract-v1
     provides_artifacts:
-      - flagship-product-system-design-v1
+      - flagship-product-system-design-v2
     blockers:
       - COMPLETION_REQUIRES_E1
+      - DEVOPS_EXECUTABLE_EVIDENCE_PENDING
 
   - id: E3-failure-decision-library
     atom: E
@@ -88,8 +121,9 @@ atoms:
       - roles/technical-product-manager/interviews/
     consumes_artifacts:
       - exact-tpm-evidence-audit-v1
+      - full-manager-mvp-product-contract-v1
     provides_artifacts:
-      - manager-failure-decision-library-v1
+      - manager-failure-decision-library-v2
     blockers:
       - SYNTHETIC_CASES_MUST_REMAIN_DRILL
       - COMPLETION_REQUIRES_E1
@@ -103,6 +137,7 @@ atoms:
     parent_completion:
       - D2-product-system-design
       - E3-failure-decision-library
+      - C6-full-mvp-product-contract
     branch: null
     base_branch: null
     owns_paths:
@@ -110,12 +145,21 @@ atoms:
       - docs/INDEX.md
       - registry/external-links.yaml
       - registry/stack-plan.yaml
+      - roles/technical-product-manager/interviews/final/
     consumes_artifacts:
-      - flagship-product-system-design-v1
-      - manager-failure-decision-library-v1
-      - exact-public-devops-evidence-subjects
+      - flagship-product-system-design-v2
+      - manager-failure-decision-library-v2
+      - full-manager-mvp-product-contract-v1
+      - ed3c/DevOps-Manager-Notes#9:full-manager-mvp-demo-evidence-v1
     provides_artifacts:
-      - interview-ready-manager-evidence-graph
+      - interview-ready-manager-evidence-graph-v2
     blockers:
-      - DEVOPS_EVIDENCE_RESIDUALS
+      - DEVOPS_FULL_DEMO_EVIDENCE_NOT_YET_ADMITTED
       - HUMAN_ADMIT_EXPORT
+
+notes:
+  - PR #8 is a true child of PR #5 because it consumes the unmerged Manager Evidence Graph bootstrap contract.
+  - E1 may proceed as a path-disjoint sibling because it audits existing evidence and does not consume PR #8 unmerged bytes.
+  - D2 completion requires both E1 exact evidence and C6 Full MVP product contract.
+  - Product tasks do not become Git children merely because they wait for DevOps receipts; cross-repository runtime evidence is PROCESS_DEPENDENCY / EXTERNAL_EVIDENCE.
+  - X4 is the sole Product-side shared-index/interview convergence owner.

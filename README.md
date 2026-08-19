@@ -1,8 +1,14 @@
 # Product Manager Notes
 
-Private **management and routing center** for the Full Manager MVP Demo and Technical Product Manager evidence program.
+Public **management and routing center** for the Full Manager MVP Demo and Technical Product Manager evidence program.
 
 This repository compiles job descriptions, articles, PDFs, repositories and technology candidates into a traceable Manager Evidence Graph. `DevOps-Manager-Notes` is the public executable evidence plane; `skills-shared` owns reusable Tech Lead / Shadow Architect / Git Town methods. Google Docs/Sheets are human projections only.
+
+## Public disclosure boundary
+
+GitHub repository metadata is the visibility source of truth. This repository is currently public. Therefore all tracked content must be safe for public disclosure: never commit credentials, customer/user private data, employer-confidential material, private source documents, private prompts containing sensitive context, or unredacted evidence. A public URL or public GitHub state does not widen the evidence ceiling of any claim.
+
+Repository visibility, permission changes, merge, release and real-experience admission remain Human-owned. See `docs/PUBLIC_DISCLOSURE_CHECKLIST.md` before P7 export.
 
 ## Control-plane ownership
 
@@ -10,7 +16,7 @@ This repository compiles job descriptions, articles, PDFs, repositories and tech
 skills-shared
   reusable Tech Lead / Shadow Architect / Git Town procedures
        ↓
-Product-Manager-Notes                     ← canonical Manager/router state
+Product-Manager-Notes                     ← canonical Manager/router state (public-safe only)
   sources / claims / requirements / gaps / product decisions / prompts / DAG
        ↓ public-safe evidence requests
 DevOps-Manager-Notes                      ← public executable evidence
@@ -21,8 +27,6 @@ Product-Manager-Notes
        ├─ Google Sheet dashboard mirror
        └─ Google Doc narrative mirror
 ```
-
-No public proof may require access to this private repository. Repository visibility, merge, release and real-experience admission remain Human-owned.
 
 ## Eight-stage execution program
 
@@ -78,6 +82,7 @@ Product-Manager-Notes/
 │   └── stack-plan.yaml
 ├── docs/
 │   ├── INDEX.md
+│   ├── PUBLIC_DISCLOSURE_CHECKLIST.md
 │   ├── architecture/
 │   │   ├── MANAGER_EVIDENCE_GRAPH.md
 │   │   └── REPO_INTEGRATION_MAP.md
@@ -163,11 +168,11 @@ DevOps PR #6 bootstrap execution contract
 └─ DevOps PR #12 / #11 Full MVP technology + routing contract
    └─ #1 invariant/evidence audit
       └─ #2 core platform
-         ├─ #3 observability/load
-         ├─ #4 policy/security
-         ├─ #7 ML/LLMOps/progressive delivery
-         ├─ #8 Demo Console
-         └─ #10 supply-chain/fault
+         ├─ #3 observability/load        → PR #36 remote FIRST_GREEN
+         ├─ #4 policy/security          → PR #38 remote FIRST_GREEN
+         ├─ #7 ML/LLMOps/progressive    → PR #39 remote FIRST_GREEN
+         ├─ #8 Demo Console             → PR #37 remote FIRST_GREEN
+         └─ #10 supply-chain/fault      → PR #40 remote FIRST_GREEN
               ↓ exact side-input receipts
             #5 failure/recovery
               ↓ + #8
@@ -218,7 +223,7 @@ Do not rely on chat memory to infer missing subjects.
 
 ```text
 mandatory:
-  Product-Manager-Notes  Manager/router state
+  Product-Manager-Notes  public-safe Manager/router state
   DevOps-Manager-Notes   executable public proof
   skills-shared          reusable method plane
 
@@ -227,7 +232,7 @@ trigger-selected:
   openwiki-source-anchoring exact source/path/quote verification
   runtime-env               secret-free local/provider runtime contracts
   skill-resume-site         P7 public portfolio export after evidence admission
-  ai-content-notes / ai-product-notes source candidates only
+  ai-content-notes / ai-product-notes source candidates only when material is public-safe
 ```
 
 No support repository becomes a second Manager state authority.
@@ -241,7 +246,7 @@ Human projections:
 - Google Sheet: `https://docs.google.com/spreadsheets/d/18W2xpge7ZgA4WHJd1wsbMOuC5vgCsskCwYeDYPG-twQ/edit`
 - Google Doc: `https://docs.google.com/document/d/10qgxR5TxYiZG55cY9wN9ANrkmG_o32vBVrSdd45fgRM/edit`
 
-Google URLs are typed edges in `registry/external-links.yaml`; a URL proves reachability only and cannot promote evidence.
+Google URLs are typed edges in `registry/external-links.yaml`; a URL proves reachability only and cannot promote evidence. Public GitHub documents must not mirror sensitive material from private/non-public sources.
 
 ## Automation boundary
 
@@ -251,16 +256,18 @@ The pipeline can highly automate source/claim intake, requirement mapping, promp
 
 ```text
 Manager/router bootstrap             PASS_AS_DESIGN       PR #5
-Full MVP Product contract             PASS_AS_DESIGN       PR #8 / #6,#7
-DevOps Full MVP technology routing    PASS_AS_DESIGN       DevOps PR #12 / #11
-Product competency evidence audit     NOT_EXERCISED        #1
-DevOps invariant/evidence audit       NOT_EXERCISED        DevOps #1
-core implementation                   NOT_IMPLEMENTED      DevOps #2
-parallel executable lanes             NOT_IMPLEMENTED      #3/#4/#7/#8/#10
-failure/recovery evidence              NOT_IMPLEMENTED      #5
-full reviewer demo                     NOT_IMPLEMENTED      #9
-interview-ready convergence            NOT_IMPLEMENTED      Product #4
-production/management tenure           OUTSIDE_REPO_PROOF   Human evidence only
+Full MVP Product contract            PASS_AS_DESIGN       PR #8 / #6,#7
+Product evidence audit               COMPLETE_STAGE       PR #9
+DevOps invariant/evidence audit      COMPLETE_STAGE       PR #13
+core remote FIRST_GREEN              PASS_BOUNDED         PR #14
+public remote fan-out M2             PASS_BOUNDED         PR #36/#38/#39/#37/#40
+live kind/Kubernetes                 NOT_EXERCISED        Local Handoff
+local model/llama.cpp                NOT_EXERCISED        Local Handoff/future runner
+live Argo Rollouts canary            NOT_EXERCISED        Local Handoff/future runner
+failure/recovery convergence         NOT_IMPLEMENTED      DevOps #5
+full reviewer convergence            NOT_IMPLEMENTED      DevOps #9
+interview-ready convergence          NOT_IMPLEMENTED      Product #4
+production/management tenure         OUTSIDE_REPO_PROOF   Human evidence only
 ```
 
-The next legal frontier is the exact evidence audits, then DevOps #2. After #2 freezes shared interfaces, #3/#4/#7/#8/#10 can fan out in parallel.
+The next legal frontier after the public remote fan-out milestone is local-substrate evidence where required plus DevOps #5 failure/recovery convergence. Remote FIRST_GREEN receipts do not promote those states.

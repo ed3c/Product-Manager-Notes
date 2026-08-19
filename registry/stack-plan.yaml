@@ -1,0 +1,121 @@
+version: 1
+method_owner: ed3c/skills-shared/skills/git-town-stacked-pr-worker
+consumer: ed3c/Product-Manager-Notes
+policy:
+  branch_or_pr_must_exist_before_identity_is_recorded: true
+  true_child_requires_unmerged_artifact_consumption: true
+  path_disjoint_work_should_remain_sibling: true
+  one_convergence_owner: true
+  merge_release_promotion_human_owned: true
+atoms:
+  - id: C0-bootstrap-contract
+    atom: C
+    issues: []
+    pull_request: 5
+    state: PR_OPEN
+    stack_class: root
+    branch: bootstrap/manager-evidence-contract
+    base_branch: main
+    owns_paths:
+      - README.md
+      - AGENTS.md
+      - roles/technical-product-manager/
+      - registry/
+      - docs/
+      - prompts/
+    consumes_artifacts: []
+    provides_artifacts:
+      - manager-evidence-contract-v1
+      - job-contract-v1
+      - stage-program-v1
+    blockers:
+      - HUMAN_ADMIT_MERGE
+
+  - id: E1-evidence-audit
+    atom: E
+    issues: [1]
+    pull_request: null
+    state: PLANNED
+    stack_class: child
+    parent: C0-bootstrap-contract
+    branch: null
+    base_branch: bootstrap/manager-evidence-contract
+    owns_paths:
+      - registry/evidence.yaml
+      - registry/gaps.yaml
+      - roles/technical-product-manager/competency-matrix.yaml
+      - docs/evidence-audit/
+    consumes_artifacts:
+      - manager-evidence-contract-v1
+      - job-contract-v1
+    provides_artifacts:
+      - exact-tpm-evidence-audit-v1
+    blockers:
+      - EXACT_REPOSITORY_EVIDENCE_NOT_YET_BOUND
+
+  - id: D2-product-system-design
+    atom: D
+    issues: [2]
+    pull_request: null
+    state: PLANNED
+    stack_class: sibling
+    parent_completion: E1-evidence-audit
+    branch: null
+    base_branch: null
+    owns_paths:
+      - roles/technical-product-manager/system-design/
+      - roles/technical-product-manager/product/
+      - docs/case-studies/
+      - docs/decisions/
+    consumes_artifacts:
+      - exact-tpm-evidence-audit-v1
+    provides_artifacts:
+      - flagship-product-system-design-v1
+    blockers:
+      - COMPLETION_REQUIRES_E1
+
+  - id: E3-failure-decision-library
+    atom: E
+    issues: [3]
+    pull_request: null
+    state: PLANNED
+    stack_class: sibling
+    parent_completion: E1-evidence-audit
+    branch: null
+    base_branch: null
+    owns_paths:
+      - roles/technical-product-manager/failures/
+      - roles/technical-product-manager/interviews/
+    consumes_artifacts:
+      - exact-tpm-evidence-audit-v1
+    provides_artifacts:
+      - manager-failure-decision-library-v1
+    blockers:
+      - SYNTHETIC_CASES_MUST_REMAIN_DRILL
+      - COMPLETION_REQUIRES_E1
+
+  - id: X4-manager-convergence
+    atom: X
+    issues: [4]
+    pull_request: null
+    state: PLANNED
+    stack_class: convergence
+    parent_completion:
+      - D2-product-system-design
+      - E3-failure-decision-library
+    branch: null
+    base_branch: null
+    owns_paths:
+      - README.md
+      - docs/INDEX.md
+      - registry/external-links.yaml
+      - registry/stack-plan.yaml
+    consumes_artifacts:
+      - flagship-product-system-design-v1
+      - manager-failure-decision-library-v1
+      - exact-public-devops-evidence-subjects
+    provides_artifacts:
+      - interview-ready-manager-evidence-graph
+    blockers:
+      - DEVOPS_EVIDENCE_RESIDUALS
+      - HUMAN_ADMIT_EXPORT

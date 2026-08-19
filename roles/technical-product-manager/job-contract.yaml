@@ -1,0 +1,35 @@
+id: JOB-2026-08-19-TPM-001
+role: Technical Product Manager
+source:
+  type: screenshot
+  platform: Threads
+  captured_date: 2026-08-19
+  evidence_state: SOURCE_CLAIM
+context:
+  open_for_expat: true
+  relocation_package: provided
+  english: fluent
+  work_mode: hybrid
+  compensation_display: "300K"
+  compensation_currency: UNKNOWN
+requirements:
+  - id: TPM-REQ-001
+    statement: "5+ years of experience in ML Engineering, Data Science, or Platform Engineering."
+    kind: REQUIREMENT
+  - id: TPM-REQ-002
+    statement: "2+ years of experience in Technical Product Management or Program Management within a fast-paced, high-scale environment."
+    kind: REQUIREMENT
+  - id: TPM-REQ-003
+    statement: "Strong understanding of ML/LLM Ops including model lifecycle, deployment, monitoring, evaluation, and versioning."
+    kind: REQUIREMENT
+  - id: TPM-REQ-004
+    statement: "Strong technical communication skills and ability to work closely with AI/ML Engineers and Engineering teams."
+    kind: REQUIREMENT
+  - id: TPM-REQ-005
+    statement: "Experience scaling internal technology tools for 1,000+ users, or SaaS/platform/technology-company experience."
+    kind: REQUIREMENT
+claim_policy:
+  production_tenure_from_repo: FORBIDDEN
+  real_user_adoption_from_load_test: FORBIDDEN
+  simulated_incident_as_production_incident: FORBIDDEN
+  local_runtime_as_production_runtime: FORBIDDEN

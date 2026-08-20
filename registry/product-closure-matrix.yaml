@@ -1,0 +1,52 @@
+schema_version: product-manager-notes/product-closure-matrix/v3
+milestone: M8
+policy:
+  issue_state_is_not_capability_evidence: true
+  merged_pr_is_not_physical_runtime_evidence: true
+  close_only_at_named_acceptance_ceiling: true
+  physical_production_legal_and_human_edges_remain_independent: true
+
+closed_completed:
+  - issue: 1
+    scope: bounded_tpm_evidence_audit
+  - issue: 2
+    scope: product_and_system_design_contract
+  - issue: 3
+    scope: failure_and_decision_library
+  - issue: 6
+    scope: full_manager_mvp_acceptance_contract
+  - issue: 7
+    scope: technology_and_commercial_use_adr
+  - issue: 10
+    scope: public_visibility_documentation_alignment
+  - issue: 12
+    scope: merged_devops_evidence_routing_preparation
+  - issue: 14
+    scope: source_to_real_problem_audit_preparation
+
+close_after_merge:
+  - issue: 16
+    scope: durable_m8_real_problem_closure_audit
+    required_artifacts:
+      - docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md
+      - registry/m8-real-problem-closure.json
+      - README.md
+      - AGENTS.md
+      - docs/INDEX.md
+
+keep_open:
+  - issue: 4
+    scope: final_interview_and_evidence_convergence
+    missing_edges:
+      - local_reviewer_receipt
+      - live_kind_receipt
+      - advanced_local_receipts
+      - employment_and_people_management_human_admission
+      - real_user_adoption_and_production_incident_admission
+
+boundaries:
+  github: canonical
+  google_sheet_doc: non_authoritative_projection
+  repository_evidence_cannot_prove_employment_or_people_management_tenure: true
+  local_kubernetes_cannot_prove_production_infrastructure_experience: true
+  synthetic_1000_vu_cannot_prove_1000_real_users: true

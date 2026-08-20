@@ -1,0 +1,105 @@
+name: Product M8 closure finalize
+
+on:
+  push:
+    branches:
+      - audit/m8-product-closure-finalize
+    paths:
+      - '.github/workflows/m8-product-closure-finalize.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: read
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Checkout exact closure subject
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify issue states and finalize machine closure
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+          import json
+          import os
+          from pathlib import Path
+          from urllib import request
+
+          headers = {
+              'Authorization': f'Bearer {os.environ["GITHUB_TOKEN"]}',
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+
+          def issue(number: int):
+              req = request.Request(f'https://api.github.com/repos/ed3c/Product-Manager-Notes/issues/{number}', headers=headers)
+              with request.urlopen(req, timeout=15) as response:
+                  return json.load(response)
+
+          closed = [1, 2, 3, 6, 7, 12, 14]
+          opened = [4]
+          observed = {'closed': {}, 'open': {}}
+          for number in closed:
+              value = issue(number)
+              observed['closed'][str(number)] = value['state']
+              assert value['state'] == 'closed', (number, value['state'])
+          for number in opened:
+              value = issue(number)
+              observed['open'][str(number)] = value['state']
+              assert value['state'] == 'open', (number, value['state'])
+
+          matrix = '''schema_version: product-manager-notes/product-closure-matrix/v2
+milestone: M8
+closed_completed:
+  - {issue: 1, scope: bounded_evidence_audit}
+  - {issue: 2, scope: product_and_system_design_contract}
+  - {issue: 3, scope: failure_and_decision_library}
+  - {issue: 6, scope: full_manager_mvp_acceptance_contract}
+  - {issue: 7, scope: technology_and_commercial_use_adr}
+  - {issue: 12, scope: merged_devops_evidence_routing}
+  - {issue: 14, scope: source_to_real_problem_closure_audit}
+keep_open:
+  - issue: 4
+    reason: physical_receipts_and_human_experience_admission_incomplete
+boundaries:
+  github: canonical
+  google_sheet_doc: non_authoritative_projection
+  repository_evidence_cannot_prove_employment_or_people_management_tenure: true
+'''
+          Path('registry/product-closure-matrix.yaml').write_text(matrix, encoding='utf-8')
+
+          route_path = Path('registry/m8-merged-evidence-routing.json')
+          route = json.loads(route_path.read_text(encoding='utf-8'))
+          route['schema_version'] = 'product-manager-notes/m8-merged-evidence-routing/v2'
+          route['product_issue_snapshot'] = observed
+          route['closed_product_contracts'] = closed
+          route['open_convergence_issue'] = 4
+          route_path.write_text(json.dumps(route, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+
+          audit_path = Path('registry/m8-real-problem-closure.json')
+          audit = json.loads(audit_path.read_text(encoding='utf-8'))
+          audit['product_issue_snapshot'] = observed
+          audit['open_product_convergence_issue'] = 4
+          audit_path.write_text(json.dumps(audit, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          print('product-m8-closure-finalized=PASS')
+          PY
+
+      - name: Remove one-shot workflow and commit
+        run: |
+          rm -f .github/workflows/m8-product-closure-finalize.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add registry/product-closure-matrix.yaml registry/m8-merged-evidence-routing.json registry/m8-real-problem-closure.json .github/workflows
+          git commit -m 'registry: finalize Product M8 issue classifications'
+          git push origin HEAD:${{ github.ref_name }}

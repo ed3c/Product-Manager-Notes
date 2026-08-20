@@ -1,52 +1,49 @@
 # Product Manager Notes
 
-Private Technical Product Manager preparation, orchestration, and evidence-routing control plane.
+Public **management and routing center** for the Full Manager MVP Demo and Technical Product Manager evidence program.
 
-This repository is the **management and routing center** for the Product/DevOps Manager evidence program. It turns job requirements, articles, PDFs, technical proposals, repository evidence, and technology candidates into a traceable Manager Evidence Graph. Material claims must route to a requirement, decision, implementation/evidence artifact, failure case, or explicit gap.
+This repository compiles job descriptions, articles, PDFs, repositories and technology candidates into a traceable Manager Evidence Graph. `DevOps-Manager-Notes` is the public executable evidence plane; `skills-shared` owns reusable Tech Lead / Shadow Architect / Git Town methods. Google Docs/Sheets are human projections only.
 
-`DevOps-Manager-Notes` is the public executable evidence plane. `skills-shared` remains the reusable method plane. Google Docs and Sheets are human-readable projections, never canonical state.
+## Public disclosure boundary
+
+GitHub repository metadata is the visibility source of truth. This repository is currently public. Therefore all tracked content must be safe for public disclosure: never commit credentials, customer/user private data, employer-confidential material, private source documents, private prompts containing sensitive context, or unredacted evidence. A public URL or public GitHub state does not widen the evidence ceiling of any claim.
+
+Repository visibility, permission changes, merge, release and real-experience admission remain Human-owned. See `docs/PUBLIC_DISCLOSURE_CHECKLIST.md` before P7 export.
 
 ## Control-plane ownership
 
 ```text
 skills-shared
-  reusable Tech Lead / Shadow Architect / Git Town / verification methods
-       │ pinned method dependency
-       ▼
-Product-Manager-Notes                     ← canonical management/router center
-  sources / requirements / gaps / prompts / stage DAG / evidence graph
-       │ public-safe evidence requests
-       ▼
-DevOps-Manager-Notes                      ← executable public evidence plane
-  CI/CD / Docker / Kubernetes / SLO / failure / recovery / receipts
-       │ exact evidence subjects
-       └─────────────────────────────────► Product-Manager-Notes
-
-Google Sheet = dashboard mirror
-Google Doc   = narrative mirror
-Human        = merge / release / visibility / real-experience admission
+  reusable Tech Lead / Shadow Architect / Git Town procedures
+       ↓
+Product-Manager-Notes                     ← canonical Manager/router state (public-safe only)
+  sources / claims / requirements / gaps / product decisions / prompts / DAG
+       ↓ public-safe evidence requests
+DevOps-Manager-Notes                      ← public executable evidence
+  app / CI / K8s / ML/LLMOps / SLO / security / failure / receipts
+       ↓ exact evidence subjects
+Product-Manager-Notes
+  competency closure / interview narrative / export routing
+       ├─ Google Sheet dashboard mirror
+       └─ Google Doc narrative mirror
 ```
-
-No public repository may require private repository access to remain understandable. Repository visibility is a Human-owned boundary.
 
 ## Eight-stage execution program
 
-The program uses two dependency classes: **start-readiness** and **completion-readiness**. A stage may begin with explicit unknowns before all predecessors are complete, but it cannot claim completion without its required receipts.
-
-| Stage | State transition | Primary owner | Parallelizable work | Completion output |
+| Stage | State transition | Main owner | Parallel work | Completion output |
 |---|---|---|---|---|
-| P0 Subject & authority bootstrap | `REQUEST_BOUND → SUBJECT_ADMITTED` | control-plane owner | no | exact repo/branch/issue, authority, evidence ceiling, read order |
-| P1 Source & evidence intake | `SUBJECT_ADMITTED → CONTEXT_ADMITTED` | evidence workers | article/PDF, GitHub evidence, technology/license source verification | source/claim/evidence/gap registries |
-| P2 Real-problem closure & System Design | `CONTEXT_ADMITTED → SYSTEM_CONTRACT_EXTRACTED` | TPM + DevOps architects | TPM product lane and DevOps reliability lane | PRD/case, invariants, state machines, failure matrix |
-| P3 Technology & ADR admission | `SYSTEM_CONTRACT_EXTRACTED → ARCHITECTURE_ADMITTED` | architecture workers | runtime, observability, policy/security candidates | ADRs, license/commercial-use inventory, rejected alternatives |
-| P4 Tech Lead DAG & Stack compilation | `ARCHITECTURE_ADMITTED → WORKERS_ADMITTED` | Tech Lead | task-packet compilation after contracts freeze | true dependency DAG, leases, molecular Stack plan, zero-context prompts |
-| P5 Parallel implementation | `WORKERS_ADMITTED → FIRST_GREEN` | bounded Workers | path-disjoint implementation leaves | code/docs/tests, exact-head receipts, draft/open PRs |
-| P6 Failure/recovery/runtime proof | `FIRST_GREEN → REVERIFIED` | Shadow + runtime owner | selected fault/load/policy probes | failure evidence, rollback/recovery, postmortem, same-failure re-test |
-| P7 Convergence/export/handoff | `REVERIFIED → READY_FOR_HUMAN_ADMIT / INTERVIEW_READY` | one convergence owner | Google narrative/dashboard projection after canonical state exists | indexes, public-safe claims, Local Handoff residuals, Human Admit packet |
+| P0 Subject & authority | `REQUEST_BOUND → SUBJECT_ADMITTED` | control-plane owner | no | exact repo/branch/commit/issue, authority, evidence ceiling |
+| P1 Source & evidence | `SUBJECT_ADMITTED → CONTEXT_ADMITTED` | evidence workers | article/PDF, GitHub, technology/license sources | source/claim/evidence/gap graph |
+| P2 Real-problem closure & System Design | `CONTEXT_ADMITTED → SYSTEM_CONTRACT_EXTRACTED` | Product + DevOps architects | product and reliability lanes | PRD/case, invariants, state machines, failure matrix |
+| P3 Technology & ADR | `SYSTEM_CONTRACT_EXTRACTED → ARCHITECTURE_ADMITTED` | architecture workers | candidate families | selected/rejected stack, license/ops/lock-in constraints |
+| P4 Tech Lead DAG & Stack | `ARCHITECTURE_ADMITTED → WORKERS_ADMITTED` | Tech Lead | task-packet compilation | start/completion DAG, leases, molecular Stack, Worker prompts |
+| P5 Parallel implementation | `WORKERS_ADMITTED → FIRST_GREEN` | bounded DevOps Workers | path-disjoint leaves | code/tests/receipts/draft PRs |
+| P6 Runtime/failure proof | `FIRST_GREEN → REVERIFIED` | Shadow + runtime owners | load/fault/canary/policy probes | rollback/recovery/postmortem/same-failure re-test evidence |
+| P7 Convergence/export/handoff | `REVERIFIED → INTERVIEW_READY / READY_FOR_HUMAN_ADMIT` | one convergence owner | non-authoritative Google projection after canonical closure | indexes, public-safe narrative, Local Handoff residuals |
 
 `FIRST_GREEN` is a mandatory Shadow checkpoint, never terminal closure.
 
-## Canonical Manager state machine
+## Manager state machine
 
 ```text
 SOURCE_BOUND
@@ -67,30 +64,31 @@ stale / contradicted / wrong-subject evidence
 
 ```text
 Product-Manager-Notes/
-├── AGENTS.md
 ├── README.md
-├── roles/
-│   └── technical-product-manager/
-│       ├── job-contract.yaml
-│       ├── competency-matrix.yaml
-│       ├── gap-analysis.md
-│       ├── system-design/
-│       ├── product/
-│       ├── failures/
-│       └── interviews/
+├── AGENTS.md
+├── roles/technical-product-manager/
+│   ├── job-contract.yaml
+│   ├── competency-matrix.yaml
+│   ├── system-design/
+│   ├── product/
+│   ├── failures/
+│   └── interviews/
 ├── registry/
 │   ├── sources.yaml
 │   ├── claims.yaml
 │   ├── evidence.yaml
+│   ├── gaps.yaml
 │   ├── external-links.yaml
-│   ├── stack-plan.yaml
-│   └── gaps.yaml
+│   └── stack-plan.yaml
 ├── docs/
 │   ├── INDEX.md
+│   ├── PUBLIC_DISCLOSURE_CHECKLIST.md
 │   ├── architecture/
-│   │   └── MANAGER_EVIDENCE_GRAPH.md
-│   ├── decisions/
-│   └── case-studies/
+│   │   ├── MANAGER_EVIDENCE_GRAPH.md
+│   │   └── REPO_INTEGRATION_MAP.md
+│   ├── case-studies/
+│   │   └── INTERNAL_AI_PLATFORM_MVP_DEMO.md
+│   └── decisions/
 └── prompts/
     ├── README.md
     ├── stage-0-subject-authority.md
@@ -100,199 +98,176 @@ Product-Manager-Notes/
     ├── stage-4-tech-lead-stack-plan.md
     ├── stage-5-parallel-implementation.md
     ├── stage-6-shadow-runtime-failure.md
-    └── stage-7-convergence-handoff.md
+    ├── stage-7-convergence-handoff.md
+    └── full-mvp-devops-router.md
 ```
 
-Directories are introduced only with a real artifact. Path presence is not capability proof.
+Directories are introduced only with real artifacts; path presence is not evidence.
 
 ## Directory → State Machine → DAG ownership
 
-| Directory / surface | State Machine responsibility | Consumes | Produces / next owner | Evidence ceiling |
+| Surface | State responsibility | Consumes | Produces / next owner | Evidence ceiling |
 |---|---|---|---|---|
-| `roles/technical-product-manager/` | requirement → competency → interview readiness | admitted sources | requirement/case contracts → task DAG | source/design until evidence binds |
-| `registry/sources.yaml` | source discovery → classification | URL/file/repo/job source | stable source IDs → claims | reachability/source only |
-| `registry/claims.yaml` | claim → type → owner → falsifier | source IDs | requirements/assumptions/unknowns | classification only |
-| `registry/evidence.yaml` | subject → evidence lane → verdict | exact receipts/artifacts | competency closure/gap reopen | named lane only |
-| `registry/gaps.yaml` | missing proof → owner → next gate | requirements + evidence | issue/task packets | no capability proof |
-| `registry/external-links.yaml` | canonical GitHub state → Google projection | admitted GitHub subjects | Doc/Sheet reachability | URL reachability only |
-| `registry/stack-plan.yaml` | issue → molecular atom → branch relation → lease | Tech Lead task contracts | Git/PR topology | planning/publication state only |
-| `docs/architecture/` | problem → invariant → state/DAG/data flow | requirements + evidence | system contract → implementation request | design/static reasoning |
-| `prompts/` | stage contract → zero-context Worker packet | exact subject + stage state | separate-session execution packet | instruction only |
-| GitHub Issues | unresolved obligation → acceptance contract | gap/stack node | work owner / Local Handoff pointer | workflow state only |
-| Google Sheet / Doc | canonical state → human dashboard/narrative | GitHub IDs/URLs | readable mirror | never promotes evidence |
+| `registry/sources.yaml` | source → stable identity | Job/Article/PDF/Repo/URL | classified claims | source/reachability |
+| `registry/claims.yaml` | claim → type/owner/falsifier | source IDs | requirement/assumption/unknown | classification only |
+| `roles/technical-product-manager/` | requirement → product/system case → interview obligation | claims + evidence | product decisions / evidence requests | design until executable evidence binds |
+| `docs/case-studies/INTERNAL_AI_PLATFORM_MVP_DEMO.md` | target-role requirement → Full MVP user journey / acceptance | job contract + selected stack | public evidence contracts → DevOps | design only |
+| `registry/evidence.yaml` | exact subject → lane → verdict | DevOps/public receipts | competency closure / gap reopen | exact named lane |
+| `registry/gaps.yaml` | missing proof → owner issue | requirements + evidence | next task contract | no capability proof |
+| `registry/stack-plan.yaml` | issue → molecular atom → branch/lease relation | Tech Lead contracts | PR topology / convergence | workflow only |
+| `prompts/` | frozen stage/task → zero-context session packet | exact subject + task DAG | separate ChatGPT/Agent work | instruction only |
+| `registry/external-links.yaml` | GitHub canonical state → Google projection | admitted GitHub state | Doc/Sheet mirror | URL reachability only |
+| GitHub Issues/PRs | obligation → task/delivery subject | gap/Stack node | implementation/evidence owner | workflow/publication only |
 
-## End-to-end data flow
+## Full Manager MVP data flow
 
 ```mermaid
 flowchart TD
-    S[Job / Article / PDF / Repo / Tech Candidate] --> SR[Product Source Registry]
+    S[Job / Article / PDF / Repo / Technology Candidate] --> SR[Product Source Registry]
     SR --> CL[Claim Classification]
     CL --> GAP[Requirement / Competency / Gap Graph]
-    GAP --> TPM[TPM PRD / Decisions / System Design]
-    GAP --> TL[Tech Lead Task Contracts + DAG + Prompt Packets]
-    TL --> BASE[DevOps Base Delivery]
-    BASE --> OBS[Observability + SLO + Load]
-    BASE --> POL[Policy + Security + License]
-    OBS --> CONV[Failure / Convergence]
-    POL --> CONV
-    CONV --> REC[Rollback / Recovery / Postmortem / Re-test]
-    REC --> EV[Evidence Receipts]
+    GAP --> CASE[Full MVP Product/System Contract]
+    CASE --> ADR[Technology / Build-vs-Buy ADR]
+    ADR --> TL[Tech Lead DAG + Stack + Worker Prompts]
+    TL --> D2[DevOps #2 Core Platform]
+    D2 --> D3[#3 Observability / SLO / Load]
+    D2 --> D4[#4 Policy / Security]
+    D2 --> D7[#7 ML/LLMOps / Rollouts]
+    D2 --> D8[#8 Demo Console]
+    D2 --> D10[#10 Supply Chain / Fault]
+    D3 --> D5[#5 Failure / Recovery]
+    D4 --> D5
+    D7 --> D5
+    D10 --> D5
+    D5 --> D9[#9 Final Demo Convergence]
+    D8 --> D9
+    D9 --> EV[Exact Public Evidence Packet]
     EV --> GAP
-    GAP --> GS[Google Sheet Dashboard Mirror]
     GAP --> GD[Google Doc Narrative Mirror]
-    GAP --> PORT[Public Portfolio Export]
-    SH[Shadow Architect MONITOR] -. material deltas .-> TPM
-    SH -. material deltas .-> BASE
-    SH -. material deltas .-> OBS
-    SH -. material deltas .-> POL
-    SH -. material deltas .-> REC
-    LH[Local Handoff Execution Queue] --> BASE
-    LH --> REC
+    GAP --> GS[Google Sheet Dashboard Mirror]
+    SH[Shadow Architect MONITOR] -. material deltas .-> CASE
+    SH -.-> D2
+    SH -.-> D5
+    LH[Local Handoff Queue] --> D2
+    LH --> D7
+    LH --> D5
 ```
 
-## Tech Lead task DAG
-
-### Start-readiness
+## Product + DevOps completion DAG
 
 ```text
-PR #5 bootstrap contract
-├── #1 evidence audit
-├── #2 product/system-design drafting with unverified claims marked explicitly
-├── #3 DRILL/SIMULATION failure-case drafting
-└── #4 dashboard/narrative schema with canonical GitHub subjects
+Product PR #5 bootstrap Manager Evidence Graph
+└─ Product PR #8 / issues #6,#7 Full MVP product + technology acceptance contract
+   ├─ Product #1 exact competency evidence audit
+   ├─ Product #2 flagship product/system-design case
+   └─ Product #3 failure/decision/interview library
+       ↓ exact public DevOps receipts
+     Product #4 final Manager/interview convergence
+
+DevOps PR #6 bootstrap execution contract
+└─ DevOps PR #12 / #11 Full MVP technology + routing contract
+   └─ #1 invariant/evidence audit
+      └─ #2 core platform
+         ├─ #3 observability/load        → PR #36 remote FIRST_GREEN
+         ├─ #4 policy/security          → PR #38 remote FIRST_GREEN
+         ├─ #7 ML/LLMOps/progressive    → PR #39 remote FIRST_GREEN
+         ├─ #8 Demo Console             → PR #37 remote FIRST_GREEN
+         └─ #10 supply-chain/fault      → PR #40 remote FIRST_GREEN
+              ↓ exact side-input receipts
+            #5 failure/recovery
+              ↓ + #8
+            #9 full reviewer convergence
 ```
 
-### Completion-readiness
+Product #4 cannot close before the final public DevOps evidence subjects are admitted. DevOps #9 cannot manufacture employment/management tenure; those remain outside repository proof.
+
+## Molecular Git Town Stack
+
+`registry/stack-plan.yaml` is canonical. Product-side plan:
 
 ```text
-PR #5 bootstrap contract
-→ #1 exact evidence audit
-   ├──► #2 flagship product/system-design case
-   └──► #3 failure/decision/postmortem library
-        (#2 and #3 are path-disjoint sibling leaves after #1)
-             └──────────┬──────────┘
-                        ▼
-               #4 convergence/index/export
+C0  PR #5  Manager Evidence Graph bootstrap                  ROOT
+└─ C6 PR #8  Full Manager MVP acceptance / technology ADR    TRUE_CHILD
+   ├─ E1 #1 exact competency evidence audit                  sibling/process leaf after contract
+   ├─ D2 #2 flagship product/system-design                   sibling
+   └─ E3 #3 failure/decision/interview library               sibling
+           ↓ public DevOps #9 evidence + verified Product artifacts
+       X4 #4 Manager/interview convergence                   CONVERGENCE
 ```
 
-An issue dependency does not automatically require Git ancestry. A true child branch exists only when it consumes the parent branch's **unmerged bytes or contracts**.
-
-## Molecular Stack PR plan
-
-The canonical machine-readable plan is `registry/stack-plan.yaml`. Until a branch/PR actually exists, its head remains `null`/`PLANNED`; documentation must not invent Git state.
-
-```text
-C0  PR #5  bootstrap evidence contract                       ROOT
-  ↓
-E1  #1     exact source/evidence audit                       TRUE_CHILD while C0 unmerged
-  ├── D2   #2 product/system-design case                     SIBLING after E1
-  └── E3   #3 failure/decision/postmortem drill library      SIBLING after E1
-        └─────────────── verified side inputs ───────────────┐
-                                                            ▼
-X4  #4     Google/index/interview convergence                CONVERGENCE
-```
-
-Atom vocabulary follows `git-town-stacked-pr-worker`: `C` contract, `K` deterministic core, `A` adapter/substrate, `E` eval/fault control, `X` convergence/E2E, `D` docs/receipt/handoff. One convergence owner updates shared indexes after prerequisite evidence is stable.
+A true child exists only for real unmerged-byte/contract consumption. Path-disjoint work remains sibling. Multi-input convergence has one mutable owner and consumes other prerequisites as exact verified side inputs.
 
 ## Separate ChatGPT session model
 
-`prompts/` contains eight zero-context stage prompts. Every new session must bind:
+The P0–P7 prompt pack is the stage-level router. After Product P4 freezes a DevOps task contract, the actual implementation fan-out uses the zero-context prompt pack in `ed3c/DevOps-Manager-Notes/prompts/` for #1/#2/#3/#4/#7/#8/#10/#5/#9.
+
+Every session binds:
 
 ```text
-repo + branch + exact commit/tree + issue
+repo / branch / commit / tree / issue
 goal / non-goals
 allowed / read-only / forbidden paths
-consumed / produced artifacts
 start dependencies / completion dependencies
-invariants + negative controls
-evidence lane + ceiling
-Shadow deltas and stop conditions
+consumed / produced artifacts
+invariants / negative controls
+evidence state / ceiling
+Shadow deltas / stop conditions
 Local Handoff boundary
-Human-owned transitions
-next prompt/stage
+Human-owned operations
+next prompt / stage
 ```
 
-A Worker must stop on subject drift, overlapping writer lease, semantic conflict, missing required evidence, unbounded side effect, or authority widening. Worker/LLM self-report is candidate evidence only.
+Do not rely on chat memory to infer missing subjects.
 
-## GitHub / Google boundary
-
-GitHub is canonical for versioned requirements, decisions, issues, PRs, evidence status, Stack state, and traceability.
-
-Current human-readable projections:
-
-- Google Sheet dashboard: `https://docs.google.com/spreadsheets/d/18W2xpge7ZgA4WHJd1wsbMOuC5vgCsskCwYeDYPG-twQ/edit`
-- Google Doc narrative index: `https://docs.google.com/document/d/10qgxR5TxYiZG55cY9wN9ANrkmG_o32vBVrSdd45fgRM/edit`
-
-Their canonical routing records live in `registry/external-links.yaml`. A URL proves reachability only; it cannot promote `ABSENT`, `NOT_EXERCISED`, DRILL, local-runtime, or virtual-load evidence.
-
-## Evidence policy
-
-Use exact states:
+## Repository integrations
 
 ```text
-PASS
-FAIL
-ABSENT
-NOT_IMPLEMENTED
-NOT_EXERCISED
-SKIPPED_BY_POLICY
-HUMAN_ADMIT_REQUIRED
+mandatory:
+  Product-Manager-Notes  public-safe Manager/router state
+  DevOps-Manager-Notes   executable public proof
+  skills-shared          reusable method plane
+
+trigger-selected:
+  truth-verify-loop          mutable/high-risk external claim verification
+  openwiki-source-anchoring exact source/path/quote verification
+  runtime-env               secret-free local/provider runtime contracts
+  skill-resume-site         P7 public portfolio export after evidence admission
+  ai-content-notes / ai-product-notes source candidates only when material is public-safe
 ```
 
-Evidence ladder:
+No support repository becomes a second Manager state authority.
+
+## Google / GitHub routing
+
+GitHub is canonical for source IDs, requirements, decisions, issues, PRs, Stack state and evidence receipts.
+
+Human projections:
+
+- Google Sheet: `https://docs.google.com/spreadsheets/d/18W2xpge7ZgA4WHJd1wsbMOuC5vgCsskCwYeDYPG-twQ/edit`
+- Google Doc: `https://docs.google.com/document/d/10qgxR5TxYiZG55cY9wN9ANrkmG_o32vBVrSdd45fgRM/edit`
+
+Google URLs are typed edges in `registry/external-links.yaml`; a URL proves reachability only and cannot promote evidence. Public GitHub documents must not mirror sensitive material from private/non-public sources.
+
+## Automation boundary
+
+The pipeline can highly automate source/claim intake, requirement mapping, prompt/task compilation, bounded repository changes, tests/CI, Stack preparation, receipt aggregation and Google projection. Physical local runtimes use the typed Local Handoff Queue. Merge/release, semantic conflict, production promotion/rollback, permissions/visibility and real-experience claims remain Human/trusted-owner operations.
+
+## Current Shadow closure
 
 ```text
-L0 SOURCE_CLAIM
-L1 STATIC_REASONING
-L2 DETERMINISTIC_TEST
-L3 LOCAL_INTEGRATION
-L4 REAL_SUBSTRATE
-L5 ADVERSARIAL_OR_CHAOS
-L6 PRODUCTION_OBSERVATION
+Manager/router bootstrap             PASS_AS_DESIGN       PR #5
+Full MVP Product contract            PASS_AS_DESIGN       PR #8 / #6,#7
+Product evidence audit               COMPLETE_STAGE       PR #9
+DevOps invariant/evidence audit      COMPLETE_STAGE       PR #13
+core remote FIRST_GREEN              PASS_BOUNDED         PR #14
+public remote fan-out M2             PASS_BOUNDED         PR #36/#38/#39/#37/#40
+live kind/Kubernetes                 NOT_EXERCISED        Local Handoff
+local model/llama.cpp                NOT_EXERCISED        Local Handoff/future runner
+live Argo Rollouts canary            NOT_EXERCISED        Local Handoff/future runner
+failure/recovery convergence         NOT_IMPLEMENTED      DevOps #5
+full reviewer convergence            NOT_IMPLEMENTED      DevOps #9
+interview-ready convergence          NOT_IMPLEMENTED      Product #4
+production/management tenure         OUTSIDE_REPO_PROOF   Human evidence only
 ```
 
-A design document is not runtime proof. A local load test is not real organizational adoption. A simulated incident is always `DRILL` or `SIMULATION`.
-
-## Shadow Architect monitor
-
-Monitor material deltas in:
-
-```text
-ASSUMPTION
-STATE
-AUTHORITY
-OWNERSHIP
-LIFECYCLE
-CONCURRENCY
-RESOURCE
-EXTERNAL_SIDE_EFFECT
-FAILURE_SURFACE
-EVIDENCE
-```
-
-At each material checkpoint ask:
-
-1. What became newly possible?
-2. What must now remain true?
-3. How would we know it is false?
-
-Use `L0 OBSERVE`, `L1 WARN`, `L2 REVIEW`, `L3 BLOCK`. Block unsafe/irreversible transitions, evidence laundering, secret/private-data exposure, visibility changes, or false experience/adoption claims.
-
-## Local Handoff boundary
-
-Remote GitHub/Google work continues in-session while the required evidence can be produced here. A Local Handoff Execution Queue is created only when proof requires a real local host/runtime/provider/forge that this session cannot exercise. Queue items bind:
-
-```text
-entry exact subject
-→ required local capabilities
-→ concrete argv/cwd/timeout
-→ durable sanitized receipt
-→ PASS exit condition
-→ next item
-```
-
-Queue validation is not queue execution. Merge, release, promotion, repository visibility, semantic conflict resolution, and real-experience admission remain Human-owned.
-
-## Current milestone
-
-M0 bootstrap contracts exist in PR #5. The next evidence frontier is #1. #2 and #3 may draft in parallel only with unresolved claims explicit; they cannot close before #1 provides exact evidence subjects. #4 is the convergence owner after the Product and DevOps evidence graphs are reviewable.
+The next legal frontier after the public remote fan-out milestone is local-substrate evidence where required plus DevOps #5 failure/recovery convergence. Remote FIRST_GREEN receipts do not promote those states.

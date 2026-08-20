@@ -1,0 +1,116 @@
+name: M8 Product evidence audit integration
+
+on:
+  pull_request:
+    paths:
+      - 'docs/evidence-audit/TPM_EXISTING_EVIDENCE_AUDIT.md'
+      - 'registry/evidence.yaml'
+      - 'registry/gaps.yaml'
+      - 'roles/technical-product-manager/competency-matrix.yaml'
+      - '.github/workflows/m8-product-evidence-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m8-product-evidence-audit-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      AUDIT_SOURCE_COMMIT: 9306183e5f54a7dcd8b397657fead595ed64a322
+    steps:
+      - name: Checkout exact integration subject
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.SOURCE_COMMIT }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact PR9 audit byte parity
+        run: |
+          set -euo pipefail
+          for path in \
+            docs/evidence-audit/TPM_EXISTING_EVIDENCE_AUDIT.md \
+            registry/evidence.yaml \
+            registry/gaps.yaml \
+            roles/technical-product-manager/competency-matrix.yaml; do
+            git cat-file -e "${AUDIT_SOURCE_COMMIT}:${path}"
+            git show "${AUDIT_SOURCE_COMMIT}:${path}" > /tmp/expected
+            cmp --silent /tmp/expected "$path" || {
+              echo "audit byte parity failed: ${path}"
+              exit 1
+            }
+          done
+          echo 'audit-byte-parity=PASS'
+
+      - name: Validate bounded evidence and Human-only facts
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          evidence = Path('registry/evidence.yaml').read_text()
+          gaps = Path('registry/gaps.yaml').read_text()
+          matrix = Path('roles/technical-product-manager/competency-matrix.yaml').read_text()
+          audit = Path('docs/evidence-audit/TPM_EXISTING_EVIDENCE_AUDIT.md').read_text()
+
+          assert evidence.startswith('version: 2\n')
+          for evidence_id in [f'TPM-EV-00{i}' for i in range(1, 9)]:
+              assert f'id: {evidence_id}' in evidence
+          for human_id in ('TPM-HUMAN-001', 'TPM-HUMAN-002', 'TPM-HUMAN-005'):
+              assert f'id: {human_id}' in evidence
+          assert evidence.count('state: HUMAN_ADMIT_REQUIRED') >= 3
+          assert 'repository evidence cannot prove employment tenure' in evidence
+          assert 'evidence PASS closes only the named narrow subclaim' in evidence
+
+          assert gaps.startswith('version: 2\n')
+          assert 'issue_1_audit_stage: COMPLETE' in gaps
+          assert 'all_job_requirements_closed: false' in gaps
+          assert gaps.count('state: HUMAN_ADMIT_REQUIRED') == 2
+          assert 'Human evidence for real adoption/company experience' in gaps
+          assert re.search(r'1,?000 real users', gaps)
+
+          for requirement in range(1, 6):
+              assert f'requirement: TPM-REQ-00{requirement}' in matrix
+          assert 'evidence_audit_issue_1: COMPLETE' in matrix
+          assert 'all_job_requirements_closed: false' in matrix
+          assert 'employment_tenure: HUMAN_ADMIT_REQUIRED' in matrix
+          assert 'real_1000_users_or_company_experience: HUMAN_ADMIT_REQUIRED' in matrix
+          assert 'virtual users imply real organizational adoption' in matrix
+
+          assert 'requirement_closure = OPEN' in audit
+          assert '1000_VU_demo = NOT_EXERCISED' in audit
+          assert 'Product issue #1 is **stage-complete as an evidence audit**' in audit
+          print('bounded-product-evidence=PASS')
+          PY
+
+      - name: Prevent stale Stack ownership and public disclosure violations
+        run: |
+          git diff --exit-code HEAD^ -- registry/stack-plan.yaml
+          if grep -R -E '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|ghp_[A-Za-z0-9]{20,}|github_pat_)' \
+            docs/evidence-audit/TPM_EXISTING_EVIDENCE_AUDIT.md \
+            registry/evidence.yaml \
+            registry/gaps.yaml \
+            roles/technical-product-manager/competency-matrix.yaml; then
+            echo 'secret-like material found in Product audit integration'
+            exit 1
+          fi
+
+      - name: Evidence boundary
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## M8 Product evidence-audit integration boundary
+          - exact PR #9 audit bytes: exercised
+          - eight bounded technical evidence subjects: admitted at explicit lanes
+          - tenure / high-scale organization / real adoption: `HUMAN_ADMIT_REQUIRED`
+          - Product issue #1 audit stage: complete
+          - all role requirements: **NOT CLOSED**
+          - physical DevOps M8 runtime: **NOT EXERCISED**
+          - evidence ceiling: `PUBLIC_PRODUCT_EVIDENCE_AUDIT_ONLY`
+          EOF

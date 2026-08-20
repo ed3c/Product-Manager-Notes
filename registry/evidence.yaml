@@ -1,4 +1,4 @@
-version: 1
+version: 2
 evidence_states:
   - PASS
   - FAIL
@@ -15,9 +15,98 @@ ladder:
   L4: REAL_SUBSTRATE
   L5: ADVERSARIAL_OR_CHAOS
   L6: PRODUCTION_OBSERVATION
-records: []
+records:
+  - id: TPM-EV-001
+    requirements: [TPM-REQ-001, TPM-REQ-004]
+    subject: ed3c/bettor-arena@6bf8f7966c02b49294e22b329a6fce68fa50a815:ARCHITECTURE.md
+    state: PASS
+    lane: L1
+    proves: platform architecture, modular ownership, verification and failure-boundary reasoning
+    ceiling: does not prove employment tenure, production scale, or team management
+
+  - id: TPM-EV-002
+    requirements: [TPM-REQ-001]
+    subject: ed3c/bettor-arena@a9fb682b04241024b24e7022083f774b3312a2d6
+    tree: bffc45ab646e5c6dd8b6fc943c83bf1c5c9d5830
+    receipt_snapshot: ed3c/bettor-arena@6bf8f7966c02b49294e22b329a6fce68fa50a815:data/proof-workflow/container-a9fb682b0424.json
+    state: PASS
+    lane: L3
+    proves: bounded container workflow receipt with explicit ran vs hashed-not-run steps
+    ceiling: container mechanism only; not Kubernetes or production infrastructure
+
+  - id: TPM-EV-003
+    requirements: [TPM-REQ-001]
+    subject: ed3c/bettor-arena@6bf8f7966c02b49294e22b329a6fce68fa50a815:.github/workflows/provider-canaries.yml
+    state: PASS
+    lane: L1
+    proves: pinned CI contract, timeout/concurrency policy and planted-mutation validation wiring
+    ceiling: workflow definition only; not a bound successful workflow run
+
+  - id: TPM-EV-004
+    requirements: [TPM-REQ-001, TPM-REQ-003, TPM-REQ-004]
+    subject: ed3c/post-training-rsi-pipeline@486fda8d025fd362652f0b5509ded515e4e5e336:README.md
+    state: PASS
+    lane: L1
+    proves: explicit post-training/model lifecycle, evaluation, promotion, rollback, lineage, audit and recovery architecture
+    ceiling: deterministic/reference implementation description; real GPU/provider/production lanes explicitly unverified
+
+  - id: TPM-EV-005
+    requirements: [TPM-REQ-001, TPM-REQ-003]
+    subject: ed3c/post-training-rsi-pipeline@486fda8d025fd362652f0b5509ded515e4e5e336:.github/workflows/ci.yml
+    state: PASS
+    lane: L1
+    proves: Python 3.11/3.12 CI definition with static checks, coverage floor and CLI smoke test
+    ceiling: versioned workflow definition only
+
+  - id: TPM-EV-006
+    requirements: [TPM-REQ-002, TPM-REQ-004]
+    subject: ed3c/truth-verify-loop@ce0c90f0c9bc87427d433ce537eea7f3a0fca008:.github-delivery/receipts/truth-verify-loop-delivery.json
+    source_commit: 5bf7726d2feced60f9270eb4eb1d6bbf10f39808
+    state: PASS
+    lane: L2
+    proves: machine-readable PRD, issue, PR and project delivery traceability
+    ceiling: product/program artifacts only; not years of TPM employment or high-scale company history
+
+  - id: TPM-EV-007
+    requirements: [TPM-REQ-004]
+    subject: ed3c/openwiki-source-anchoring@d83176cfd91c213090d235d45cf1cfa64856e98f:REVIEWER_GUIDE.md
+    state: PASS
+    lane: L1
+    proves: concise evidence-first reviewer communication and adversarial-review contract
+    ceiling: written communication artifact only
+
+  - id: TPM-EV-008
+    requirements: [TPM-REQ-005]
+    subject: ed3c/fde-agent-platform@f7cb2831738fba3426933b048257591f2b54d502:README.md
+    state: PASS
+    lane: L1
+    proves: platform/public-private control-plane boundary design
+    ceiling: bootstrap design only; no 1000-user adoption or runtime-scale proof
+
+  - id: TPM-HUMAN-001
+    requirements: [TPM-REQ-001]
+    state: HUMAN_ADMIT_REQUIRED
+    lane: L0
+    proves: nothing from GitHub
+    ceiling: five-plus years ML/Data/Platform employment tenure requires resume/employer/interview evidence
+
+  - id: TPM-HUMAN-002
+    requirements: [TPM-REQ-002]
+    state: HUMAN_ADMIT_REQUIRED
+    lane: L0
+    proves: nothing from GitHub
+    ceiling: two-plus years TPM/program-management employment and high-scale organizational context require Human evidence
+
+  - id: TPM-HUMAN-005
+    requirements: [TPM-REQ-005]
+    state: HUMAN_ADMIT_REQUIRED
+    lane: L0
+    proves: nothing from GitHub
+    ceiling: real 1000-user adoption or qualifying SaaS/platform/company employment cannot be inferred from synthetic/load or design artifacts
 rules:
   - lower evidence never promotes itself into a higher lane
   - exact subject, revision and environment must be bound before PASS
   - load-test virtual users never prove real adoption
   - simulation and drills never prove production incident history
+  - repository evidence cannot prove employment tenure without independent Human evidence
+  - evidence PASS closes only the named narrow subclaim, not the whole job requirement

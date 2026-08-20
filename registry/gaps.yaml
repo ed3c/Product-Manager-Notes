@@ -1,22 +1,41 @@
-version: 1
+version: 2
 gaps:
   - id: TPM-GAP-001
     requirement: TPM-REQ-001
-    state: ABSENT
-    description: audited evidence for ML/Data/Platform engineering depth is not yet bound
+    state: HUMAN_ADMIT_REQUIRED
+    description: exact technical artifacts are now bound at L1-L3, but GitHub cannot prove 5+ years of ML/Data/Platform employment tenure
+    technical_evidence: [TPM-EV-001, TPM-EV-002, TPM-EV-003, TPM-EV-004, TPM-EV-005]
+    next_gate: Human resume/employer/interview evidence for tenure; new Full MVP adds fresh public platform evidence
+
   - id: TPM-GAP-002
     requirement: TPM-REQ-002
-    state: ABSENT
-    description: GitHub can prove product/program artifacts but cannot prove years of employment tenure
+    state: HUMAN_ADMIT_REQUIRED
+    description: PRD/issue/PR/project delivery artifacts are bound, but 2+ years TPM/program-management employment and real high-scale organizational context are not repo-provable
+    technical_evidence: [TPM-EV-006]
+    next_gate: Product #2/#3 for interview-quality decision artifacts plus Human employment evidence
+
   - id: TPM-GAP-003
     requirement: TPM-REQ-003
     state: NOT_IMPLEMENTED
-    description: executable model/eval/deploy/monitor/version lifecycle case is not yet closed
+    description: existing post-training lifecycle evidence is bound, but the Full Manager MVP MLflow/local-model/canary/telemetry/rollback runtime loop is not yet implemented
+    existing_evidence: [TPM-EV-004, TPM-EV-005]
+    next_gate: ed3c/DevOps-Manager-Notes#7 then #5/#9
+
   - id: TPM-GAP-004
     requirement: TPM-REQ-004
     state: NOT_EXERCISED
-    description: architecture review and interview narratives have not yet been verified against exact evidence
+    description: architecture/reviewer/delivery communication artifacts are bound; the final interview narrative still must consume exact Full MVP evidence and cannot claim organizational history not shown by the repos
+    existing_evidence: [TPM-EV-001, TPM-EV-004, TPM-EV-006, TPM-EV-007]
+    next_gate: Product #2/#3 and final Product #4 convergence
+
   - id: TPM-GAP-005
     requirement: TPM-REQ-005
     state: NOT_EXERCISED
-    description: reproducible 1000-virtual-user platform capacity evidence is not yet bound
+    description: platform design evidence exists but no repo artifact proves 1,000 real users or qualifying employer history; the planned 1,000-VU experiment remains synthetic evidence only
+    existing_evidence: [TPM-EV-008]
+    next_gate: DevOps #3/#9 for 1,000-VU capacity evidence; Human evidence for real adoption/company experience
+
+closure:
+  audit_artifact: docs/evidence-audit/TPM_EXISTING_EVIDENCE_AUDIT.md
+  issue_1_audit_stage: COMPLETE
+  all_job_requirements_closed: false

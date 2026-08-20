@@ -71,7 +71,8 @@ jobs:
           assert gaps.startswith('version: 2\n')
           assert 'issue_1_audit_stage: COMPLETE' in gaps
           assert 'all_job_requirements_closed: false' in gaps
-          assert gaps.count('HUMAN_ADMIT_REQUIRED') >= 3
+          assert gaps.count('state: HUMAN_ADMIT_REQUIRED') == 2
+          assert 'Human evidence for real adoption/company experience' in gaps
           assert '1000 real users' in gaps
 
           for requirement in range(1, 6):
@@ -79,6 +80,7 @@ jobs:
           assert 'evidence_audit_issue_1: COMPLETE' in matrix
           assert 'all_job_requirements_closed: false' in matrix
           assert 'employment_tenure: HUMAN_ADMIT_REQUIRED' in matrix
+          assert 'real_1000_users_or_company_experience: HUMAN_ADMIT_REQUIRED' in matrix
           assert 'virtual users imply real organizational adoption' in matrix
 
           assert 'requirement_closure = OPEN' in audit

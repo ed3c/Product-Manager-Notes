@@ -52,6 +52,7 @@ jobs:
       - name: Validate bounded evidence and Human-only facts
         run: |
           python3 - <<'PY'
+          import re
           from pathlib import Path
 
           evidence = Path('registry/evidence.yaml').read_text()
@@ -73,7 +74,7 @@ jobs:
           assert 'all_job_requirements_closed: false' in gaps
           assert gaps.count('state: HUMAN_ADMIT_REQUIRED') == 2
           assert 'Human evidence for real adoption/company experience' in gaps
-          assert '1000 real users' in gaps
+          assert re.search(r'1,?000 real users', gaps)
 
           for requirement in range(1, 6):
               assert f'requirement: TPM-REQ-00{requirement}' in matrix

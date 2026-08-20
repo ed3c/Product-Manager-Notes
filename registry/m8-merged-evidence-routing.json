@@ -6,8 +6,8 @@
     "repository": "ed3c/Product-Manager-Notes",
     "branch": "audit/m8-durable-main-routing",
     "base_main_commit": "73bb702447c496ab43428126808b1cac40c9a2d2",
-    "integration_pull_request": null,
-    "current_head": null
+    "integration_pull_request": 21,
+    "mutable_head_authority": "GITHUB_PULL_REQUEST_METADATA"
   },
   "devops_subject": {
     "repository": "ed3c/DevOps-Manager-Notes",

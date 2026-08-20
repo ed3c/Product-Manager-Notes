@@ -1,115 +1,157 @@
 # Documentation & Traceability Index
 
-This is a navigation surface. Canonical authority remains with exact registries, issues/PRs/commits, GitHub Actions artifacts, executable checks and admitted receipts.
+This is a navigation surface. Canonical authority remains with exact registries, issues, PRs, commits, executable checks, GitHub Actions artifacts, and admitted receipts.
 
-## Start here
+## Current route
 
 ```text
 README.md
 → AGENTS.md
 → docs/PUBLIC_DISCLOSURE_CHECKLIST.md
-→ docs/case-studies/INTERNAL_AI_PLATFORM_MVP_DEMO.md
-→ docs/milestones/PUBLIC_MANAGER_M4_ROUTING.md
-→ roles/technical-product-manager/job-contract.yaml
-→ roles/technical-product-manager/competency-matrix.yaml
-→ roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md
-→ registry/public-m4-manager-routing.json
+→ docs/milestones/M8_MERGED_EVIDENCE_ROUTING.md
+→ docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md
+→ registry/m8-merged-evidence-routing.json
+→ registry/m8-real-problem-closure.json
+→ registry/product-closure-matrix.yaml
 → registry/stack-plan.yaml
-→ exact Product/DevOps issue / PR / commit / Actions run / artifact / Local Handoff receipt
+→ DevOps M8 README
+→ DevOps handoff/local-handoff-queue.json
+→ exact issue / PR / commit / run / artifact / receipt
+```
+
+Historical M4 route:
+
+```text
+docs/milestones/PUBLIC_MANAGER_M4_ROUTING.md
+→ registry/public-m4-manager-routing.json
+→ roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md
 ```
 
 ## Control planes
 
 | Plane | Owner | Purpose |
 |---|---|---|
-| Reusable method | `ed3c/skills-shared` | Tech Lead / Shadow Architect / Git Town procedures |
-| Manager routing | `ed3c/Product-Manager-Notes` | sources, requirements, gaps, Product/System Design, task routing, interview closure |
-| Executable proof | `ed3c/DevOps-Manager-Notes` | CI/runtime/ML lifecycle/security/failure/reviewer evidence |
-| Human dashboard | Google Sheet | non-authoritative mirror |
-| Human narrative | Google Doc | non-authoritative mirror |
+| Reusable method | `ed3c/skills-shared` | Tech Lead / Shadow Architect / Git Town / Local Handoff |
+| Manager routing | `ed3c/Product-Manager-Notes` | sources, requirements, decisions, gaps, interview closure |
+| Executable evidence | `ed3c/DevOps-Manager-Notes` | implementation, CI, runtime contracts, failure, receipts |
+| Human dashboard | Google Sheet | non-authoritative projection |
+| Human narrative | Google Doc | non-authoritative projection |
 
-## Observed Product Stack
+## Exact current subjects
 
 ```text
-PR #5 bootstrap
-└─ PR #8 Full Manager MVP Product contract
+Product M8 base main
+  73bb702447c496ab43428126808b1cac40c9a2d2
+
+DevOps main
+  commit 5d0c5db1626bf5c1a83334ea864b6a3eb7613df3
+  tree   abd7fa38e9aa7ca720d9f110559a1f05b05c2023
+
+DevOps Local Handoff execution subject
+  commit   e7b4e23799a3579572598ebd5864a80831d49db4
+  tree     0b72b9f09f73d3829db2f138d457a5691641bf79
+  rollback bb940bf7d5a3b1f605b79e9fb8f33c463a8ee5a7
+  active   M8-LOCAL-REVIEWER-001
+```
+
+## Product State Machine
+
+```text
+SOURCE_ADMITTED
+→ CLAIM_CLASSIFIED
+→ REAL_PROBLEM_CLASSIFIED
+→ REQUIREMENT_GAP_BOUND
+→ PRODUCT_SYSTEM_CONTRACT_ADMITTED
+→ DEVOPS_EVIDENCE_REQUESTED
+→ REMOTE_EVIDENCE_BOUND
+→ DEVOPS_MAIN_INTEGRATED
+→ LOCAL_HANDOFF_PENDING
+→ PHYSICAL_EVIDENCE_BOUND
+→ COMPETENCY_MATRIX_REVERIFIED
+→ HUMAN_ADMIT_REQUIRED | INTERVIEW_PACKET_READY
+```
+
+Current frontier:
+
+```text
+DESIGN_CLOSED + REMOTE_DETERMINISTIC_CLOSED
+→ LOCAL_PHYSICAL_OPEN
+```
+
+## Real-problem audit
+
+`docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md` is the canonical public-safe problem → criterion → evidence → residual map.
+
+It normalizes claims from:
+
+```text
+job descriptions
+articles
+PDFs
+repositories
+technology candidates
+```
+
+Source format is not evidence strength. Article/PDF/README presence cannot substitute for a missing implementation or receipt.
+
+## Molecular Stack
+
+```text
+Product PR #5 bootstrap
+└─ PR #8 Full Manager MVP contract
    └─ PR #11 public disclosure alignment
-      └─ PR #12 public Manager M4 routing                  PASS_BOUNDED_AS_ROUTING
-           ↑ PR #9 existing evidence audit                EXACT SIDE INPUT
-           ↑ DevOps PR #44 M4 reviewer evidence           EXTERNAL EVIDENCE
-           ↑ DevOps PR #45 Local Handoff state            PROCESS DEPENDENCY
-           ↓
-         issue #4 final interview/evidence convergence    OPEN
+      └─ PR #12 M4 routing
+           ↑ PR #9 TPM evidence audit                  exact side input
+           ↑ DevOps PR #44 reviewer                   external evidence
+
+Merged Product follow-up
+├─ PR #13 exact TPM evidence integration
+├─ PR #15/#17 M8 audit and closure preparation
+└─ M8 durable routing/audit convergence               current owner
+
+Merged DevOps executable route
+PR #68 M1–M7 backbone
+├─ PR #37 Demo Console
+├─ PR #38 Policy / Security / License
+├─ PR #39 ML / LLMOps
+├─ PR #40 Supply Chain / Fault
+├─ PR #69 advanced runner contracts
+└─ PR #70 M8 main integration / Local Handoff
 ```
 
-Cross-repository evidence does not create Git ancestry.
+Cross-repository evidence is a typed process/evidence edge, never Git ancestry.
 
-## Exact DevOps M4 evidence
+## Local Handoff
 
 ```text
-repository        ed3c/DevOps-Manager-Notes
-PR                #44
-source commit     55d18cdc556ca5d66c67406318ae25196c077fd2
-source tree       a4ad37d9baf73a5239f79c516c67b0182420336a
-status            PASS_BOUNDED
+M8-LOCAL-REVIEWER-001          ACTIVE
+        ↓ real PASS + trusted advancement
+M8-LIVE-KIND-002               BLOCKED_BY_PREDECESSOR
+        ↓ real PASS + trusted advancement
+M8-COMPILE-ADVANCED-QUEUE-003  BLOCKED_BY_PREDECESSOR
+        ↓ canonical assertion + trusted advancement
+Argo → Model → Synthetic 1,000 VU → Registry Signing
 ```
 
-Deterministic reviewer lane:
+Queue contract PASS is not queue execution PASS.
+
+## Issue route
 
 ```text
-run               32256802856
-artifact          9366615717
-digest            sha256:e652cdf3ccb8de7a8655f9148bc6471a29bcaeaef2d55f6255bca2cb2b1e19d3
-ceiling           GITHUB_HOSTED_REMOTE_REVIEWER_CONVERGENCE_ONLY
+Product bounded contracts closed:
+  #1 #2 #3 #6 #7 #10 #12 #14
+
+Close after durable M8 audit merge:
+  #16
+
+Keep open final convergence:
+  #4
+
+Open DevOps physical/higher-ceiling owners:
+  #2 #3 #4 #5 #7 #9 #10 #54 #67
 ```
 
-Artifact re-verification lane:
-
-```text
-run               32256802554
-artifact          9366596481
-digest            sha256:696f56be2fb637e386941eb313caa7c9448900ad0bad88b3a96119b95315596c
-ceiling           GITHUB_HOSTED_ARTIFACT_REDOWNLOAD_AND_REVIEWER_BUNDLE_ONLY
-```
-
-The second lane re-downloads and verifies the six exact M2/M3 GitHub Actions archives before admitting required public-safe files into the reviewer packet.
-
-## Local Handoff state
-
-```text
-DevOps PR         #45
-head              a697c74a11d5d6492eaddb44aabd1a331899ee32
-contract run      32257928774 PASS
-active item       M4-LOCAL-REVIEWER-001
-local execution   NOT_EXERCISED
-next substrate    M4-LIVE-SUBSTRATE-002 = BLOCKED_UNRESOLVED
-```
-
-Queue-contract PASS is workflow evidence only; it does not prove the local command ran.
-
-## Product M4 artifacts
-
-- `docs/milestones/PUBLIC_MANAGER_M4_ROUTING.md` — role requirement → exact DevOps M4 evidence → Product issue #4 route.
-- `registry/public-m4-manager-routing.json` — machine-readable exact M4 subjects and Human/runtime residuals.
-- `roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md` — bounded 90-second, System Design, failure and TPM/DevOps interview narrative.
-- `registry/stack-plan.yaml` — Product PR #5/#8/#9/#11/#12 and final #4 convergence topology.
-
-## Closure route
-
-```text
-Job / Article / PDF / Repo / Technology
-→ source ID / claim classification
-→ requirement / gap
-→ Product/System Design / ADR
-→ Tech Lead DAG / Worker contract
-→ molecular DevOps implementation
-→ deterministic/runtime/fault receipts
-→ failure/recovery/retest
-→ exact M4 reviewer convergence
-→ Product PR #12 bounded evidence routing
-→ Product issue #4 human-facing convergence
-→ Google / portfolio projection only after disclosure review
-```
+Issue state is workflow metadata, not capability evidence.
 
 ## Google projections
 
@@ -121,13 +163,9 @@ GitHub is canonical. Google reachability and prose cannot promote evidence.
 ## Residual boundary
 
 ```text
-live kind/Kubernetes                       NOT_EXERCISED
-real Argo CD/Rollouts                      NOT_EXERCISED
-local Qwen/llama.cpp                       NOT_EXERCISED
-1,000-VU capacity/recovery                 NOT_EXERCISED
-real 1,000-user adoption                   OUTSIDE_REPOSITORY_PROOF
-production incident history                OUTSIDE_REPOSITORY_PROOF
-formal TPM / people-management tenure      HUMAN_ADMIT_REQUIRED
+local deterministic reviewer                  NOT_EXERCISED
+live kind/Kubernetes                          NOT_EXERCISED
+Argo / model / 1,000 VU / registry signing    NOT_EXERCISED
+real production users / incidents / tenure    OUTSIDE_REPOSITORY_PROOF
+formal TPM / people-management tenure         HUMAN_ADMIT_REQUIRED
 ```
-
-Any missing edge remains explicitly open.

@@ -1,0 +1,174 @@
+name: Product M8 durable routing audit
+
+on:
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'docs/INDEX.md'
+      - 'docs/milestones/M8_MERGED_EVIDENCE_ROUTING.md'
+      - 'docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md'
+      - 'registry/m8-merged-evidence-routing.json'
+      - 'registry/m8-real-problem-closure.json'
+      - 'registry/product-closure-matrix.yaml'
+      - 'registry/stack-plan.yaml'
+      - '.github/workflows/m8-durable-routing-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: product-m8-durable-routing-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      GITHUB_TOKEN: ${{ github.token }}
+      DEVOPS_MAIN: 5d0c5db1626bf5c1a83334ea864b6a3eb7613df3
+      DEVOPS_MAIN_TREE: abd7fa38e9aa7ca720d9f110559a1f05b05c2023
+      HANDOFF_COMMIT: e7b4e23799a3579572598ebd5864a80831d49db4
+      HANDOFF_TREE: 0b72b9f09f73d3829db2f138d457a5691641bf79
+    steps:
+      - name: Checkout exact Product subject
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.SOURCE_COMMIT }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate machine registries and durable files
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+          import json
+          from pathlib import Path
+
+          route = json.loads(Path('registry/m8-merged-evidence-routing.json').read_text())
+          assert route['schema_version'] == 'product-manager-notes/m8-merged-evidence-routing/v2'
+          assert route['verdict'] == 'PASS_BOUNDED'
+          assert route['devops_subject']['commit'] == '5d0c5db1626bf5c1a83334ea864b6a3eb7613df3'
+          assert route['devops_subject']['tree'] == 'abd7fa38e9aa7ca720d9f110559a1f05b05c2023'
+          assert route['local_handoff_subject']['commit'] == 'e7b4e23799a3579572598ebd5864a80831d49db4'
+          assert route['local_handoff_subject']['tree'] == '0b72b9f09f73d3829db2f138d457a5691641bf79'
+          assert route['local_handoff_subject']['runtime_state'] == 'NOT_EXERCISED'
+          assert route['physical_runtime_state'] == 'NOT_EXERCISED'
+          assert route['human_experience_state'] == 'HUMAN_ADMIT_REQUIRED'
+          assert route['product_issue_classification']['keep_open'] == [4]
+          assert route['product_issue_classification']['close_after_m8_merge'] == [16]
+
+          audit = json.loads(Path('registry/m8-real-problem-closure.json').read_text())
+          assert audit['schema_version'] == 'product-manager-notes/m8-real-problem-closure/v2'
+          assert audit['verdict'] == 'PASS_BOUNDED'
+          assert audit['frontier']['local_physical'] == 'OPEN'
+          assert audit['frontier']['production'] == 'OPEN'
+          assert audit['frontier']['human_experience'] == 'HUMAN_ADMIT_REQUIRED'
+          assert all(value == 'NOT_EXERCISED' for value in audit['physical_residuals'].values())
+
+          matrix = Path('registry/product-closure-matrix.yaml').read_text()
+          assert matrix.startswith('schema_version: product-manager-notes/product-closure-matrix/v3\n')
+          for number in (1, 2, 3, 6, 7, 10, 12, 14):
+              assert f'issue: {number}' in matrix
+          assert 'issue: 16' in matrix and 'close_after_merge:' in matrix
+          assert 'issue: 4' in matrix and 'keep_open:' in matrix
+
+          stack = Path('registry/stack-plan.yaml').read_text()
+          assert stack.startswith('version: 4\n')
+          assert 'id: X8-product-m8-durable-routing' in stack
+          assert 'state: BRANCH_OPEN_PR_PENDING' in stack or 'state: PR_OPEN_VALIDATED' in stack
+          assert 'issue #4 remains open' in stack.lower()
+
+          required = [
+              'README.md',
+              'AGENTS.md',
+              'docs/INDEX.md',
+              'docs/milestones/M8_MERGED_EVIDENCE_ROUTING.md',
+              'docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md',
+          ]
+          for path in required:
+              assert Path(path).is_file(), path
+
+          readme = Path('README.md').read_text()
+          agents = Path('AGENTS.md').read_text()
+          index = Path('docs/INDEX.md').read_text()
+          assert 'M8 PRODUCT_DURABLE_ROUTING_AND_PROBLEM_AUDIT' in readme
+          assert 'M8 source-closure law' in agents
+          assert 'M8_REAL_PROBLEM_CLOSURE_AUDIT.md' in index
+          assert not Path('.github/workflows/m8-product-routing-sync.yml').exists()
+          assert not Path('.github/workflows/m8-real-problem-closure-sync.yml').exists()
+          print('product-m8-local-shape=PASS')
+          PY
+
+      - name: Verify exact public GitHub subjects and issue frontier
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+          import base64
+          import json
+          import os
+          from urllib import request
+
+          headers = {
+              'Authorization': f'Bearer {os.environ["GITHUB_TOKEN"]}',
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+
+          def github(url: str):
+              req = request.Request(url, headers=headers)
+              with request.urlopen(req, timeout=15) as response:
+                  return json.load(response)
+
+          branch = github('https://api.github.com/repos/ed3c/DevOps-Manager-Notes/branches/main')
+          assert branch['commit']['sha'] == os.environ['DEVOPS_MAIN']
+          assert branch['commit']['commit']['tree']['sha'] == os.environ['DEVOPS_MAIN_TREE']
+
+          queue_payload = github('https://api.github.com/repos/ed3c/DevOps-Manager-Notes/contents/handoff/local-handoff-queue.json?ref=main')
+          queue = json.loads(base64.b64decode(queue_payload['content']).decode())
+          assert queue['schema_version'] == 'agentic-tech-lead/local-handoff-queue/v1'
+          assert queue['subject']['commit'] == os.environ['HANDOFF_COMMIT']
+          assert queue['subject']['tree'] == os.environ['HANDOFF_TREE']
+          assert queue['current'] == {'active_item': 'M8-LOCAL-REVIEWER-001', 'state': 'ACTIVE'}
+          assert [item['state'] for item in queue['items']] == [
+              'ACTIVE', 'BLOCKED_BY_PREDECESSOR', 'BLOCKED_BY_PREDECESSOR'
+          ]
+
+          expected = {4: 'open', 10: 'closed', 16: 'open'}
+          for number, state in expected.items():
+              issue = github(f'https://api.github.com/repos/ed3c/Product-Manager-Notes/issues/{number}')
+              assert issue['state'] == state, (number, issue['state'], state)
+          print('product-m8-external-readback=PASS')
+          PY
+
+      - name: Public disclosure and evidence boundary
+        run: |
+          set -euo pipefail
+          if grep -R -E '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|ghp_[A-Za-z0-9]{20,}|github_pat_|AIza[0-9A-Za-z_-]{20,})' \
+            README.md AGENTS.md docs/milestones/M8_MERGED_EVIDENCE_ROUTING.md \
+            docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md registry/m8-*.json registry/product-closure-matrix.yaml; then
+            echo 'secret-like material found in Product M8 public surfaces'
+            exit 1
+          fi
+          grep -q 'NOT_EXERCISED' README.md
+          grep -q 'HUMAN_ADMIT_REQUIRED' README.md
+          grep -q 'Google' README.md
+          grep -q 'GitHub is canonical' README.md
+
+      - name: Evidence summary
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Product M8 durable routing boundary
+          - durable README/AGENTS/INDEX/milestone/audit/registries: validated
+          - DevOps exact main + Local Handoff subject readback: validated
+          - Product #4 open / #10 closed / #16 open-before-merge: validated
+          - source-to-real-problem closure matrix: validated
+          - physical local execution: **NOT_EXERCISED**
+          - production and Human tenure/adoption evidence: **NOT_ADMITTED**
+          - evidence ceiling: `PRODUCT_REQUIREMENT_DECISION_ROUTING_AND_CLOSURE_AUDIT_ONLY`
+          EOF

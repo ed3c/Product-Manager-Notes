@@ -1,0 +1,47 @@
+{
+  "schema_version": "product-manager-notes/m8-real-problem-closure/v2",
+  "verdict": "PASS_BOUNDED",
+  "audit": "docs/audits/M8_REAL_PROBLEM_CLOSURE_AUDIT.md",
+  "canonical_state": "GITHUB",
+  "google_mirrors": "NON_AUTHORITATIVE",
+  "frontier": {
+    "design": "CLOSED_AT_NAMED_CEILINGS",
+    "remote_deterministic": "CLOSED_AT_NAMED_CEILINGS",
+    "local_physical": "OPEN",
+    "production": "OPEN",
+    "human_experience": "HUMAN_ADMIT_REQUIRED"
+  },
+  "problem_count": 14,
+  "open_devops_issues": [2, 3, 4, 5, 7, 9, 10, 54, 67],
+  "open_product_convergence_issue": 4,
+  "close_after_audit_merge": 16,
+  "physical_residuals": {
+    "local_reviewer": "NOT_EXERCISED",
+    "live_kind_kubernetes": "NOT_EXERCISED",
+    "argo_controllers": "NOT_EXERCISED",
+    "argo_application_reconciliation": "NOT_EXERCISED",
+    "live_rollouts_canary": "NOT_EXERCISED",
+    "local_model_inference": "NOT_EXERCISED",
+    "synthetic_1000_vu": "NOT_EXERCISED",
+    "registry_stored_signing": "NOT_EXERCISED"
+  },
+  "outside_repository_proof": [
+    "real_production_users_and_adoption",
+    "real_production_incident_history",
+    "production_tenure"
+  ],
+  "human_admit_required": [
+    "employment_dates_and_scope",
+    "formal_tpm_or_program_tenure",
+    "direct_report_and_people_management_history"
+  ],
+  "forbidden_promotions": [
+    "source_link_to_completion_receipt",
+    "article_or_pdf_to_implementation",
+    "merged_pr_to_physical_runtime",
+    "drill_to_production_incident",
+    "synthetic_1000_vu_to_1000_real_users",
+    "portfolio_code_to_employment_or_people_management_tenure",
+    "license_metadata_to_blanket_legal_clearance"
+  ]
+}

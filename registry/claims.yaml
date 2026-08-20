@@ -1,0 +1,89 @@
+version: 1
+classifications:
+  - REQUIREMENT
+  - DESIGN_PROPOSAL
+  - ASSUMPTION
+  - OBSERVATION
+  - MEASURED_FACT
+  - EXTERNAL_CLAIM
+  - UNKNOWN
+closure_states:
+  - OPEN
+  - PARTIAL
+  - CLOSED_AT_DECLARED_EVIDENCE_CEILING
+claims:
+  - id: CLAIM-TPM-MLLMMOPS
+    source_id: SRC-JOB-2026-08-19-MANAGER-001
+    requirement_id: TPM-REQ-003
+    classification: REQUIREMENT
+    statement: strong ML/LLMOps understanding requires model lifecycle, deployment, monitoring, evaluation and versioning competence
+    real_problem: AI platform decisions fail when model/config/evaluation/deployment lifecycle states are implicit or untraceable
+    owner: Product-Manager-Notes#2
+    implementation_evidence_owner: ed3c/DevOps-Manager-Notes
+    closure_state: OPEN
+    missing_proof:
+      - audited existing evidence
+      - executable lifecycle case evidence
+      - failure/recovery evidence
+
+  - id: CLAIM-TPM-INTERNAL-SCALE
+    source_id: SRC-JOB-2026-08-19-MANAGER-001
+    requirement_id: TPM-REQ-005
+    classification: REQUIREMENT
+    statement: experience scaling internal technology tools for 1,000+ users or SaaS/platform/technology-company experience
+    real_problem: internal platform architecture must handle user growth without confusing synthetic capacity with organizational adoption
+    owner: Product-Manager-Notes#2
+    implementation_evidence_owner: ed3c/DevOps-Manager-Notes#3
+    closure_state: OPEN
+    missing_proof:
+      - capacity/load evidence with environment and workload identity
+      - real adoption remains unavailable unless independently evidenced
+    forbidden_promotion:
+      - 1000 virtual users to 1000 real users
+
+  - id: CLAIM-DEVOPS-SDLC
+    source_id: SRC-JOB-2026-08-19-MANAGER-001
+    requirement_id: DEVOPS-REQ-002
+    classification: REQUIREMENT
+    statement: hands-on DevOps/SDLC capability includes CI/CD, automation, deployment and engineering best practices
+    real_problem: delivery success without artifact identity, rollback, observable correctness and failure handling is incomplete
+    owner: ed3c/DevOps-Manager-Notes#2
+    closure_state: OPEN
+    missing_proof:
+      - executable base delivery slice
+      - exact artifact/runtime receipts
+      - FIRST_GREEN Shadow review
+
+  - id: CLAIM-DEVOPS-K8S
+    source_id: SRC-JOB-2026-08-19-MANAGER-001
+    requirement_id: DEVOPS-REQ-003
+    classification: REQUIREMENT
+    statement: solid Git, Docker and Kubernetes knowledge is required
+    real_problem: declarative deployment knowledge must include lifecycle, resources, readiness/business correctness, failure and rollback semantics
+    owner: ed3c/DevOps-Manager-Notes#2
+    closure_state: OPEN
+    missing_proof:
+      - local capability receipt
+      - application/container/Kubernetes implementation
+      - runtime failure/recovery evidence
+    forbidden_promotion:
+      - local Kubernetes to production cluster experience
+
+  - id: CLAIM-MANAGER-FAILURE-CLOSURE
+    source_id: SRC-SKILLS-SHADOW
+    requirement_id: null
+    classification: DESIGN_PROPOSAL
+    statement: FIRST_GREEN is not closure; manager evidence should include failure, recovery, corrective change and repeated verification
+    real_problem: success-path-only portfolios do not demonstrate operational decision quality or system resilience
+    owner: Product-Manager-Notes#3
+    implementation_evidence_owner: ed3c/DevOps-Manager-Notes#5
+    closure_state: OPEN
+    missing_proof:
+      - controlled failure drills
+      - corrective-change receipts
+      - same-failure re-test
+
+rules:
+  - every CLOSED claim must name exact evidence subjects and evidence ceiling in registry/evidence.yaml
+  - prose, Google projections, issue closure, CI green, branch existence or Worker self-report cannot close a claim by themselves
+  - contradictions reopen the claim and its dependent interview narrative

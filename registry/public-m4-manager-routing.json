@@ -1,0 +1,66 @@
+{
+  "schema_version": "manager-evidence/public-m4-routing/v1",
+  "status": "PASS_BOUNDED_AS_ROUTING",
+  "product_issue": 4,
+  "product_git_parent": {
+    "pull_request": 11,
+    "branch": "docs/public-disclosure-alignment",
+    "head": "4ca26a9442ed13d3a48352c6774b9779038b879b"
+  },
+  "product_side_inputs": [
+    {
+      "pull_request": 9,
+      "purpose": "existing TPM evidence audit",
+      "mode": "EXACT_EVIDENCE_REFERENCE_ONLY"
+    }
+  ],
+  "devops_m4": {
+    "repository": "ed3c/DevOps-Manager-Notes",
+    "issue": 9,
+    "pull_request": 44,
+    "source_commit": "55d18cdc556ca5d66c67406318ae25196c077fd2",
+    "source_tree": "a4ad37d9baf73a5239f79c516c67b0182420336a",
+    "milestone": "PUBLIC_REMOTE_REVIEWER_CONVERGENCE_FIRST_GREEN",
+    "status": "PASS_BOUNDED",
+    "deterministic_reviewer": {
+      "workflow_run": 32256802856,
+      "artifact_id": 9366615717,
+      "artifact_digest": "sha256:e652cdf3ccb8de7a8655f9148bc6471a29bcaeaef2d55f6255bca2cb2b1e19d3",
+      "evidence_ceiling": "GITHUB_HOSTED_REMOTE_REVIEWER_CONVERGENCE_ONLY"
+    },
+    "artifact_reverification": {
+      "workflow_run": 32256802554,
+      "artifact_id": 9366596481,
+      "artifact_digest": "sha256:696f56be2fb637e386941eb313caa7c9448900ad0bad88b3a96119b95315596c",
+      "evidence_ceiling": "GITHUB_HOSTED_ARTIFACT_REDOWNLOAD_AND_REVIEWER_BUNDLE_ONLY"
+    }
+  },
+  "local_handoff": {
+    "repository": "ed3c/DevOps-Manager-Notes",
+    "pull_request": 45,
+    "head": "a697c74a11d5d6492eaddb44aabd1a331899ee32",
+    "queue_contract_validation_run": 32257928774,
+    "queue_contract_state": "PASS",
+    "local_execution_state": "NOT_EXERCISED",
+    "active_item": "M4-LOCAL-REVIEWER-001",
+    "next_live_substrate_state": "BLOCKED_UNRESOLVED"
+  },
+  "claims": {
+    "technical_platform_evidence": "PASS_BOUNDED",
+    "failure_recovery_drill_evidence": "PASS_BOUNDED",
+    "reviewer_demo_evidence": "PASS_BOUNDED",
+    "live_kubernetes": "NOT_EXERCISED",
+    "real_argo_runtime": "NOT_EXERCISED",
+    "local_model_runtime": "NOT_EXERCISED",
+    "load_1000_vu": "NOT_EXERCISED",
+    "real_1000_user_adoption": "OUTSIDE_REPOSITORY_PROOF",
+    "production_incident_history": "OUTSIDE_REPOSITORY_PROOF",
+    "engineering_management_tenure": "HUMAN_ADMIT_REQUIRED",
+    "tpm_program_tenure": "HUMAN_ADMIT_REQUIRED"
+  },
+  "external_projection_policy": {
+    "github_is_canonical": true,
+    "google_evidence_authority": "NONE",
+    "portfolio_export_requires_public_disclosure_check": true
+  }
+}

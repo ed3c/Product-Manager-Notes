@@ -1,0 +1,103 @@
+version: 1
+policy:
+  source_presence_is_not_truth: true
+  mutable_url_requires_fresh_verification_before_claim_promotion: true
+  private_source_must_not_leak_into_public_evidence: true
+  source_id_required_for_material_claim: true
+source_types:
+  - JOB_POSTING
+  - ARTICLE
+  - PDF
+  - GITHUB_REPOSITORY
+  - GITHUB_FILE
+  - TECHNOLOGY_CANDIDATE
+  - GOOGLE_PROJECTION
+sources:
+  - id: SRC-JOB-2026-08-19-MANAGER-001
+    type: JOB_POSTING
+    location: conversation-attachment
+    url: null
+    visibility: PRIVATE_CONVERSATION_SOURCE
+    tracking_ref: supplied screenshot
+    exact_revision: null
+    classification: REQUIREMENT_SOURCE
+    state: BOUND
+    owns_requirements:
+      - JOB-2026-08-19-TPM-001
+      - JOB-2026-08-19-DEVOPS-001
+    notes:
+      - compensation currency remains UNKNOWN
+      - public artifacts may carry derived requirement text but must not invent source metadata
+
+  - id: SRC-SKILLS-TECH-LEAD
+    type: GITHUB_REPOSITORY
+    location: ed3c/skills-shared/skills/agentic-tech-lead-orchestration
+    url: https://github.com/ed3c/skills-shared/tree/main/skills/agentic-tech-lead-orchestration
+    visibility: CONNECTED_REPOSITORY_SOURCE
+    tracking_ref: main
+    exact_revision: null
+    classification: METHOD_SOURCE
+    state: MUTABLE_SOURCE_PIN_REQUIRED_FOR_EXECUTION
+    notes:
+      - owns task contracts, true dependency DAG, evidence lanes and Local Handoff procedure
+
+  - id: SRC-SKILLS-SHADOW
+    type: GITHUB_REPOSITORY
+    location: ed3c/skills-shared/skills/spatial-loop-systems-engineering
+    url: https://github.com/ed3c/skills-shared/tree/main/skills/spatial-loop-systems-engineering
+    visibility: CONNECTED_REPOSITORY_SOURCE
+    tracking_ref: main
+    exact_revision: null
+    classification: METHOD_SOURCE
+    state: MUTABLE_SOURCE_PIN_REQUIRED_FOR_EXECUTION
+    notes:
+      - owns MONITOR delta classes, checkpoints, invariant/failure/evidence laws
+
+  - id: SRC-SKILLS-GIT-TOWN
+    type: GITHUB_REPOSITORY
+    location: ed3c/skills-shared/skills/git-town-stacked-pr-worker
+    url: https://github.com/ed3c/skills-shared/tree/main/skills/git-town-stacked-pr-worker
+    visibility: CONNECTED_REPOSITORY_SOURCE
+    tracking_ref: main
+    exact_revision: null
+    classification: METHOD_SOURCE
+    state: MUTABLE_SOURCE_PIN_REQUIRED_FOR_EXECUTION
+    notes:
+      - owns molecular Stack branch/PR topology and convergence rules
+
+  - id: PROJECTION-GSHEET-MANAGER-EVIDENCE
+    type: GOOGLE_PROJECTION
+    location: Manager Evidence Graph Dashboard — Product & DevOps
+    url: https://docs.google.com/spreadsheets/d/18W2xpge7ZgA4WHJd1wsbMOuC5vgCsskCwYeDYPG-twQ/edit
+    visibility: ACCOUNT_BOUND
+    tracking_ref: live document
+    exact_revision: null
+    classification: NON_AUTHORITATIVE_PROJECTION
+    state: BOUND
+    notes:
+      - dashboard mirror only; zero evidence-promotion authority
+
+  - id: PROJECTION-GDOC-MANAGER-NARRATIVE
+    type: GOOGLE_PROJECTION
+    location: Manager Interview & Failure Narrative Index — Product & DevOps
+    url: https://docs.google.com/document/d/10qgxR5TxYiZG55cY9wN9ANrkmG_o32vBVrSdd45fgRM/edit
+    visibility: ACCOUNT_BOUND
+    tracking_ref: live document
+    exact_revision: null
+    classification: NON_AUTHORITATIVE_PROJECTION
+    state: BOUND
+    notes:
+      - narrative mirror only; zero evidence-promotion authority
+
+future_ingestion_contract:
+  required_fields:
+    - id
+    - type
+    - location
+    - url
+    - visibility
+    - tracking_ref
+    - exact_revision
+    - classification
+    - state
+  rule: article/PDF/repo ingestion must add a source ID before generating requirements, claims, tasks, or interview narratives

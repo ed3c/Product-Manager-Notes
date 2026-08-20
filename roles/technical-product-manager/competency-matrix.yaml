@@ -1,0 +1,61 @@
+role_contract: JOB-2026-08-19-TPM-001
+matrix:
+  - requirement: TPM-REQ-001
+    competency: ML/Data/Platform engineering depth
+    current_evidence: ABSENT
+    proof_obligations:
+      - architecture case with explicit state, ownership, failure, scale, and cost constraints
+      - executable or independently verifiable platform evidence
+      - failure/negative-control evidence
+    target_artifacts:
+      - system-design/internal-ai-platform.md
+      - evidence links to audited public/private repositories
+
+  - requirement: TPM-REQ-002
+    competency: Technical product/program management in high-scale environment
+    current_evidence: ABSENT
+    proof_obligations:
+      - PRD and roadmap
+      - prioritization and dependency DAG
+      - stakeholder/ownership model
+      - delivery risks and decision log
+    non_provable_by_github:
+      - actual years of TPM/program-management employment
+
+  - requirement: TPM-REQ-003
+    competency: ML/LLMOps lifecycle
+    current_evidence: ABSENT
+    proof_obligations:
+      - model/prompt/config version lifecycle
+      - evaluation and promotion gate
+      - deployment and rollback design
+      - quality, latency, cost, and failure monitoring
+
+  - requirement: TPM-REQ-004
+    competency: Technical communication across AI/ML and Engineering
+    current_evidence: ABSENT
+    proof_obligations:
+      - concise architecture review
+      - ADR with alternatives and trade-offs
+      - incident/postmortem narrative
+      - interview-ready explanation tied to exact evidence
+
+  - requirement: TPM-REQ-005
+    competency: Internal platform / SaaS scale
+    current_evidence: ABSENT
+    proof_obligations:
+      - load model and capacity assumptions
+      - 1000-virtual-user reproducible test or equivalent bounded evidence
+      - tenancy, quota, rate-limit, backpressure and SLO design
+    forbidden_inference:
+      - virtual users imply real organizational adoption
+
+gate:
+  interview_ready_requires:
+    - exact source binding
+    - decision trade-off
+    - implementation_or_bounded_simulation
+    - failure_or_negative_case
+    - corrective_change
+    - verification
+    - explicit evidence ceiling

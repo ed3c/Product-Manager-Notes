@@ -1,0 +1,80 @@
+name: Public Manager M4 routing
+
+on:
+  pull_request:
+    paths:
+      - 'docs/milestones/PUBLIC_MANAGER_M4_ROUTING.md'
+      - 'registry/public-m4-manager-routing.json'
+      - 'roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md'
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'docs/INDEX.md'
+      - 'registry/stack-plan.yaml'
+      - '.github/workflows/public-m4-routing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact routing subject
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate exact M4 evidence routing
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          r = json.loads(Path('registry/public-m4-manager-routing.json').read_text())
+          assert r['schema_version'] == 'manager-evidence/public-m4-routing/v1'
+          assert r['status'] == 'PASS_BOUNDED_AS_ROUTING'
+          m4 = r['devops_m4']
+          assert m4['pull_request'] == 44
+          assert m4['source_commit'] == '55d18cdc556ca5d66c67406318ae25196c077fd2'
+          assert m4['source_tree'] == 'a4ad37d9baf73a5239f79c516c67b0182420336a'
+          assert m4['deterministic_reviewer']['workflow_run'] == 32256802856
+          assert m4['deterministic_reviewer']['artifact_digest'] == 'sha256:e652cdf3ccb8de7a8655f9148bc6471a29bcaeaef2d55f6255bca2cb2b1e19d3'
+          assert m4['artifact_reverification']['workflow_run'] == 32256802554
+          assert m4['artifact_reverification']['artifact_digest'] == 'sha256:696f56be2fb637e386941eb313caa7c9448900ad0bad88b3a96119b95315596c'
+          handoff = r['local_handoff']
+          assert handoff['pull_request'] == 45
+          assert handoff['queue_contract_state'] == 'PASS'
+          assert handoff['local_execution_state'] == 'NOT_EXERCISED'
+          assert handoff['next_live_substrate_state'] == 'BLOCKED_UNRESOLVED'
+          claims = r['claims']
+          assert claims['real_1000_user_adoption'] == 'OUTSIDE_REPOSITORY_PROOF'
+          assert claims['production_incident_history'] == 'OUTSIDE_REPOSITORY_PROOF'
+          assert claims['engineering_management_tenure'] == 'HUMAN_ADMIT_REQUIRED'
+          assert claims['tpm_program_tenure'] == 'HUMAN_ADMIT_REQUIRED'
+          print('public-manager-m4-routing=PASS')
+          PY
+
+      - name: Validate public narrative boundaries
+        run: |
+          grep -q 'DRILL' roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md
+          grep -q 'production incident history' roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md
+          grep -q 'HUMAN_ADMIT_REQUIRED' docs/milestones/PUBLIC_MANAGER_M4_ROUTING.md
+          grep -Eq 'Google (Doc/Sheet|Sheet/Doc) URLs have zero evidence-promotion authority' AGENTS.md
+          if grep -R -I -E '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|ghp_[A-Za-z0-9]{20,}|github_pat_)' docs/milestones registry/public-m4-manager-routing.json roles/technical-product-manager/interviews/M4_MANAGER_DEMO_STORY.md README.md AGENTS.md; then
+            echo 'secret-like material found in public Product routing artifacts' >&2
+            exit 1
+          fi
+
+      - name: Evidence boundary
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Product M4 routing boundary
+          - exact DevOps M4 subjects: validated
+          - Local Handoff state: validated as queue-contract PASS / local execution NOT_EXERCISED
+          - bounded Manager interview story: validated
+          - Google projection authority remains NONE
+          - real adoption / production incident / management tenure promotion: forbidden
+          - evidence ceiling: `PUBLIC_MANAGER_ROUTING_AND_NARRATIVE_CONTRACT_ONLY`
+          EOF
